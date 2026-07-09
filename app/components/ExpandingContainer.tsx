@@ -1,53 +1,84 @@
 'use client'
 
-import { useRef } from 'react'
-import { motion, useScroll, useTransform } from 'framer-motion'
+import { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 
 interface ExpandingContainerProps {
   imageSrc?: string
   videoSrc?: string
   alt?: string
-  className?: string
+  placeholderLabel?: string
 }
 
 export default function ExpandingContainer({
   imageSrc,
   videoSrc,
   alt = '',
-  className = '',
+  placeholderLabel,
 }: ExpandingContainerProps) {
-  const containerRef = useRef<HTMLDivElement>(null)
+  const wrapperRef = useRef<HTMLDivElement>(null)
+  const [progress, setProgress] = useState(0)
 
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ['start end', 'end start'],
-  })
+  useEffect(() => {
+    let ticking = false
+    function tick() {
+      const el = wrapperRef.current
+      if (el) {
+        const r = el.getBoundingClientRect()
+        const p = Math.max(0, Math.min(1, 1 - r.top / window.innerHeight))
+        setProgress(p)
+      }
+      ticking = false
+    }
+    function onScroll() {
+      if (!ticking) {
+        ticking = true
+        requestAnimationFrame(tick)
+      }
+    }
+    tick()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    window.addEventListener('resize', onScroll, { passive: true })
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('resize', onScroll)
+    }
+  }, [])
 
-  // Structure only — ranges are identity placeholders until the real
-  // expand/contract curve is designed.
-  const containerScale = useTransform(scrollYProgress, [0, 0.5, 1], [1, 1, 1])
-  const mediaY = useTransform(scrollYProgress, [0, 1], ['0%', '0%'])
+  const width = 60 + progress * 32 // 60% -> 92%
+  const height = 320 + progress * 260 // px
+  const parallaxY = (progress - 0.5) * -60 // px
+
+  const hasAsset = Boolean(imageSrc || videoSrc)
 
   return (
-    <motion.div
-      ref={containerRef}
-      style={{ scale: containerScale }}
-      className={`relative overflow-hidden rounded-sw ${className}`}
-    >
-      <motion.div style={{ y: mediaY }} className="absolute inset-0">
-        {videoSrc ? (
-          <video
-            src={videoSrc}
-            className="h-full w-full object-cover"
-            muted
-            loop
-            playsInline
-          />
-        ) : imageSrc ? (
-          <Image src={imageSrc} alt={alt} fill className="object-cover" />
-        ) : null}
-      </motion.div>
-    </motion.div>
+    <div ref={wrapperRef} className="flex justify-center">
+      <div
+        className="overflow-hidden rounded-sw transition-[width,height] duration-[250ms] ease-out"
+        style={{ width: `${width}%`, height, maxWidth: 1200 }}
+      >
+        <div
+          className="relative flex h-[130%] w-full items-center justify-center bg-[repeating-linear-gradient(45deg,#1c0f24,#1c0f24_11px,#160b1d_11px,#160b1d_22px)]"
+          style={{ marginTop: '-15%', transform: `translateY(${parallaxY}px)` }}
+        >
+          {videoSrc ? (
+            <video
+              src={videoSrc}
+              className="absolute inset-0 h-full w-full object-cover"
+              muted
+              loop
+              playsInline
+            />
+          ) : imageSrc ? (
+            <Image src={imageSrc} alt={alt} fill sizes="92vw" className="object-cover" />
+          ) : null}
+          {!hasAsset && placeholderLabel && (
+            <span className="relative px-8 text-center font-satoshi text-xs uppercase tracking-[0.14em] text-cognac">
+              {placeholderLabel}
+            </span>
+          )}
+        </div>
+      </div>
+    </div>
   )
 }

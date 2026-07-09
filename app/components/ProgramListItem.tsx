@@ -12,17 +12,25 @@ export default function ProgramListItem({
   return (
     <a
       href={href}
-      className="group flex items-center justify-between gap-6 border-b border-cognac/40 px-2 py-6 transition-colors hover:bg-bordeaux/40"
+      className="group flex flex-wrap items-center justify-between gap-4 border-t border-cognac py-8 px-3 transition-colors duration-[400ms] ease-sw hover:bg-[#3a0b14] md:gap-10 md:py-10 md:px-7"
     >
-      <span className="font-vollkorn text-2xl text-parchment">{name}</span>
-      <span className="flex items-center gap-4">
-        <span className="font-satoshi text-body-mobile text-parchment/70">
+      <div className="flex flex-1 basis-[300px] items-center gap-6">
+        <span
+          className="inline-block origin-left whitespace-normal font-satoshi text-[21px] font-light leading-[1.2] transition-transform duration-[400ms] ease-sw group-hover:scale-[1.03] md:whitespace-nowrap md:text-[34px]"
+        >
+          {name}
+        </span>
+      </div>
+      <div className="flex flex-1 basis-[280px] items-center justify-start gap-5">
+        <span
+          className="inline-block origin-left whitespace-normal font-vollkorn text-base leading-[1.5] text-parchment opacity-85 transition-transform duration-[400ms] ease-sw group-hover:scale-[1.03] md:whitespace-nowrap"
+        >
           {description}
         </span>
-        <span className="-translate-x-1.5 text-cognac opacity-0 transition-all duration-200 group-hover:translate-x-0 group-hover:opacity-100">
+        <span className="ml-auto -translate-x-2 font-satoshi text-[22px] text-cognac opacity-0 transition-[opacity,transform] duration-300 ease-out group-hover:translate-x-0 group-hover:opacity-100">
           →
         </span>
-      </span>
+      </div>
     </a>
   )
 }

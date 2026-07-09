@@ -5,83 +5,48 @@ import CTAButtons from './CTAButtons'
 
 const LINKS = ['The Work', 'The Blog', 'About', 'Work With Me'] as const
 
-function LinkedInIcon() {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="currentColor"
-      className="h-5 w-5"
-      aria-hidden="true"
-    >
-      <path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3V9zm7 0h3.8v1.64h.05c.53-.99 1.83-2.04 3.77-2.04 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.6c0-1.34-.02-3.06-1.87-3.06-1.87 0-2.16 1.46-2.16 2.96V21h-4V9z" />
-    </svg>
-  )
-}
-
-function InstagramIcon() {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.8"
-      className="h-5 w-5"
-      aria-hidden="true"
-    >
-      <rect x="3" y="3" width="18" height="18" rx="5" />
-      <circle cx="12" cy="12" r="4" />
-      <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
-    </svg>
-  )
-}
-
 export default function Footer() {
-  const [showCTA, setShowCTA] = useState(false)
+  const [ctaOpen, setCtaOpen] = useState(false)
 
   return (
-    <footer className="bg-aubergine px-6 py-16 md:px-12">
-      <nav className="flex flex-wrap items-center justify-center gap-x-3 gap-y-4">
-        {LINKS.map((link, i) => (
-          <span key={link} className="flex items-center gap-3">
-            {link === 'Work With Me' ? (
-              <button
-                type="button"
-                onClick={() => setShowCTA((v) => !v)}
-                className="font-vollkorn text-xl text-parchment transition-colors hover:text-cognac"
-              >
-                {link}
-              </button>
-            ) : (
-              <a
-                href="#"
-                className="font-vollkorn text-xl text-parchment transition-colors hover:text-cognac"
-              >
-                {link}
-              </a>
-            )}
-            {i < LINKS.length - 1 && (
-              <span className="text-cognac">·</span>
-            )}
-          </span>
-        ))}
-      </nav>
+    <footer className="flex flex-col items-center gap-10 bg-aubergine px-6 pb-12 pt-[70px] md:px-16 md:pt-[120px]">
+      <div className="flex flex-wrap items-baseline justify-center gap-5 md:gap-11">
+        {LINKS.map((link) =>
+          link === 'Work With Me' ? (
+            <button
+              key={link}
+              type="button"
+              aria-expanded={ctaOpen}
+              onClick={() => setCtaOpen((v) => !v)}
+              className="cursor-pointer font-vollkorn text-2xl text-parchment md:text-[30px]"
+            >
+              {link}
+            </button>
+          ) : (
+            <a key={link} href="#" className="font-vollkorn text-2xl text-parchment md:text-[30px]">
+              {link}
+            </a>
+          )
+        )}
+      </div>
 
-      {showCTA && (
-        <div className="mx-auto mt-8 max-w-md">
-          <CTAButtons />
-        </div>
-      )}
+      <div
+        className="flex w-full max-w-[440px] flex-wrap justify-center gap-3.5 overflow-hidden transition-[max-height,opacity] duration-500 ease-sw"
+        style={{ maxHeight: ctaOpen ? 160 : 0, opacity: ctaOpen ? 1 : 0 }}
+      >
+        <CTAButtons />
+      </div>
 
-      <div className="mt-10 flex justify-center gap-6 text-parchment">
-        <a href="#" aria-label="LinkedIn" className="transition-colors hover:text-cognac">
-          <LinkedInIcon />
+      <div className="flex gap-7">
+        <a href="#" className="font-satoshi text-[13px] tracking-[0.08em] text-cognac">
+          LinkedIn
         </a>
-        <a href="#" aria-label="Instagram" className="transition-colors hover:text-cognac">
-          <InstagramIcon />
+        <a href="#" className="font-satoshi text-[13px] tracking-[0.08em] text-cognac">
+          Instagram
         </a>
       </div>
 
-      <p className="mt-8 text-center font-satoshi text-label text-parchment/60">
+      <p className="font-satoshi text-xs tracking-[0.04em] text-parchment/60">
         © Sleek Wealth 2026. The Business of Luxury.
       </p>
     </footer>

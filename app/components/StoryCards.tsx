@@ -1,9 +1,5 @@
-'use client'
-
-import { useEffect, useState } from 'react'
-
 interface StoryCard {
-  number: string | number
+  num: string
   title: string
   body: string
 }
@@ -13,75 +9,38 @@ interface StoryCardsProps {
 }
 
 export default function StoryCards({ cards }: StoryCardsProps) {
-  const [activeIndex, setActiveIndex] = useState(0)
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveIndex((i) => (i + 1) % cards.length)
-    }, 3000)
-    return () => clearInterval(interval)
-  }, [cards.length])
-
-  const goPrev = () =>
-    setActiveIndex((i) => (i - 1 + cards.length) % cards.length)
-  const goNext = () => setActiveIndex((i) => (i + 1) % cards.length)
-
   return (
-    <div className="w-full">
-      <div className="mb-8 flex gap-2">
-        {cards.map((card, i) => (
-          <div
-            key={card.number}
-            className="h-1 flex-1 overflow-hidden rounded-full bg-cognac/20"
-          >
-            <div
-              className={`h-full bg-cognac md:w-full ${
-                i === activeIndex ? 'w-full' : 'w-0'
-              }`}
-            />
+    <div className="flex flex-wrap gap-6">
+      {cards.map((card, i) => (
+        <div
+          key={card.num}
+          className="group flex flex-1 basis-[280px] flex-col rounded-sw border border-cognac px-7 pb-[34px] pt-[26px] transition-[transform,border-color,background-color] duration-500 ease-sw hover:-translate-y-1.5 hover:border-[#c98a4a] hover:bg-[rgba(156,107,53,0.06)]"
+          style={{ minHeight: 'clamp(240px, 32vh, 300px)' }}
+        >
+          <div className="mb-[26px] flex gap-1.5">
+            {[0, 1, 2].map((barIndex) => (
+              <span
+                key={barIndex}
+                className="h-[3px] flex-1 overflow-hidden rounded-full bg-parchment/[0.22]"
+              >
+                <span
+                  className="block h-full origin-left bg-cognac"
+                  style={{ transform: `scaleX(${barIndex <= i ? 1 : 0})` }}
+                />
+              </span>
+            ))}
           </div>
-        ))}
-      </div>
-
-      {/* Desktop: static three-up */}
-      <div className="hidden md:grid md:grid-cols-3 md:gap-6">
-        {cards.map((card) => (
-          <StoryCardItem key={card.number} card={card} />
-        ))}
-      </div>
-
-      {/* Mobile: auto-advancing, tappable */}
-      <div className="relative md:hidden">
-        <button
-          type="button"
-          aria-label="Previous story"
-          onClick={goPrev}
-          className="absolute inset-y-0 left-0 z-10 w-1/2"
-        />
-        <button
-          type="button"
-          aria-label="Next story"
-          onClick={goNext}
-          className="absolute inset-y-0 right-0 z-10 w-1/2"
-        />
-        <StoryCardItem card={cards[activeIndex]} />
-      </div>
-    </div>
-  )
-}
-
-function StoryCardItem({ card }: { card: StoryCard }) {
-  return (
-    <div className="rounded-sw border border-cognac/30 bg-bordeaux/20 p-8">
-      <span className="font-satoshi text-label text-cognac">
-        {card.number}
-      </span>
-      <h3 className="mt-4 font-vollkorn text-2xl text-parchment">
-        {card.title}
-      </h3>
-      <p className="mt-4 font-satoshi text-body-mobile text-parchment/80">
-        {card.body}
-      </p>
+          <div className="mb-4 font-satoshi text-[13px] tracking-[0.16em] text-cognac">
+            {card.num}
+          </div>
+          <h3 className="mb-4 font-vollkorn text-[28px] leading-[1.3] text-parchment md:text-[38px]">
+            {card.title}
+          </h3>
+          <p className="font-satoshi text-base leading-[1.7] text-parchment opacity-90">
+            {card.body}
+          </p>
+        </div>
+      ))}
     </div>
   )
 }

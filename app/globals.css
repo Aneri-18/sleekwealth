@@ -1,8 +1,35 @@
 @import "tailwindcss";
 @config "../tailwind.config.js";
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+@layer base {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html,
+  body {
+    background: #120818;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background: #9c6b35;
+    color: #120818;
+  }
+
+  a {
+    color: #9c6b35;
+    text-decoration: none;
+  }
+}
+
+[data-hstrip]::-webkit-scrollbar {
+  display: none;
+}
+
+[data-hstrip] {
+  scrollbar-width: none;
 }

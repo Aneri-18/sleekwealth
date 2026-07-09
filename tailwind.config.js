@@ -6,6 +6,10 @@ module.exports = {
   ],
   theme: {
     extend: {
+      screens: {
+        sm: "600px",
+        md: "900px",
+      },
       colors: {
         aubergine: "#120818",
         bordeaux: "#4A0E1A",
@@ -16,17 +20,11 @@ module.exports = {
         vollkorn: ["var(--font-vollkorn)", "serif"],
         satoshi: ["var(--font-satoshi)", "sans-serif"],
       },
-      fontSize: {
-        hero: ["96px", { lineHeight: "1.4" }],
-        "hero-mobile": ["52px", { lineHeight: "1.4" }],
-        section: ["64px", { lineHeight: "1.4" }],
-        "section-mobile": ["36px", { lineHeight: "1.4" }],
-        body: ["18px", { lineHeight: "1.7" }],
-        "body-mobile": ["16px", { lineHeight: "1.7" }],
-        label: ["13px", { lineHeight: "1.5" }],
-      },
       borderRadius: {
         sw: "10px",
+      },
+      transitionTimingFunction: {
+        sw: "cubic-bezier(0.16, 1, 0.3, 1)",
       },
     },
   },
