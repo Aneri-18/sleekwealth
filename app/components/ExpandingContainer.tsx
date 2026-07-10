@@ -46,7 +46,6 @@ export default function ExpandingContainer({
   }, [])
 
   const width = 60 + progress * 32 // 60% -> 92%
-  const height = 320 + progress * 260 // px
   const parallaxY = (progress - 0.5) * -60 // px
 
   const hasAsset = Boolean(imageSrc || videoSrc)
@@ -54,8 +53,8 @@ export default function ExpandingContainer({
   return (
     <div ref={wrapperRef} className="flex justify-center">
       <div
-        className="overflow-hidden rounded-sw transition-[width,height] duration-[250ms] ease-out"
-        style={{ width: `${width}%`, height, maxWidth: 1200 }}
+        className="aspect-[3/4] overflow-hidden rounded-sw transition-[width] duration-[250ms] ease-out md:aspect-[16/9]"
+        style={{ width: `${width}%`, maxWidth: 1200 }}
       >
         <div
           className="relative flex h-[130%] w-full items-center justify-center bg-[repeating-linear-gradient(45deg,#1c0f24,#1c0f24_11px,#160b1d_11px,#160b1d_22px)]"

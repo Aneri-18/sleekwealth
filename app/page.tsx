@@ -176,18 +176,18 @@ export default function Home() {
 
         <div className="flex w-full flex-wrap items-start justify-center gap-4">
           <div className="w-full sm:w-auto" style={fade(boxShown.L)}>
-            <div className="cursor-default whitespace-normal rounded-[26px] border border-cognac px-6 py-4 text-center text-base leading-[1.7] text-parchment transition-[transform,background-color,border-color] duration-300 ease-out hover:scale-[1.04] hover:border-transparent hover:bg-bordeaux sm:mx-auto sm:max-w-[340px] sm:whitespace-nowrap sm:px-8">
+            <div className="cursor-default whitespace-normal rounded-[26px] border border-cognac px-6 py-4 text-center text-base leading-[1.7] text-parchment transition-[transform,background-color,border-color] duration-300 ease-out hover:scale-[1.04] hover:border-transparent hover:bg-bordeaux sm:mx-auto sm:w-fit sm:whitespace-nowrap sm:px-8">
               And like any language, fluency takes years to build.
             </div>
           </div>
           <div className="w-full sm:w-auto" style={fade(boxShown.R)}>
-            <div className="cursor-default whitespace-normal rounded-[26px] border border-cognac px-6 py-4 text-center text-base leading-[1.7] text-parchment transition-[transform,background-color,border-color] duration-300 ease-out hover:scale-[1.04] hover:border-transparent hover:bg-bordeaux sm:mx-auto sm:max-w-[340px] sm:whitespace-nowrap sm:px-8">
+            <div className="cursor-default whitespace-normal rounded-[26px] border border-cognac px-6 py-4 text-center text-base leading-[1.7] text-parchment transition-[transform,background-color,border-color] duration-300 ease-out hover:scale-[1.04] hover:border-transparent hover:bg-bordeaux sm:mx-auto sm:w-fit sm:whitespace-nowrap sm:px-8">
               If luxury and premium is your space, then Sleek Wealth was built for you.
             </div>
           </div>
         </div>
         <div className="mt-4 flex w-full justify-center" style={fade(boxShown.F)}>
-          <div className="w-full cursor-default whitespace-normal rounded-[26px] border border-cognac px-6 py-4 text-center text-base leading-[1.7] text-parchment transition-[transform,background-color,border-color] duration-300 ease-out hover:scale-[1.04] hover:border-transparent hover:bg-bordeaux sm:mx-auto sm:max-w-[340px] sm:whitespace-nowrap sm:px-8">
+          <div className="w-full cursor-default whitespace-normal rounded-[26px] border border-cognac px-6 py-4 text-center text-base leading-[1.7] text-parchment transition-[transform,background-color,border-color] duration-300 ease-out hover:scale-[1.04] hover:border-transparent hover:bg-bordeaux sm:mx-auto sm:w-fit sm:whitespace-nowrap sm:px-8">
             To help you master this fluency faster.
           </div>
         </div>
@@ -296,8 +296,8 @@ export default function Home() {
       </section>
 
       {/* SECTION 6 — THE BLOG PREVIEW + CTA */}
-      <section data-bg="bordeaux" className="py-16 md:py-[140px]">
-        <div className="mx-auto max-w-[1200px] px-5 md:px-16">
+      <section data-bg="bordeaux" className="px-5 py-16 md:px-16 md:py-[140px]">
+        <div className="mx-auto max-w-[1200px]">
           <p
             ref={blogLabelRef}
             style={fade(blogLabelInView)}
@@ -310,7 +310,7 @@ export default function Home() {
             style={{ ...wipe(blogHeadlineInView), fontFamily: 'var(--font-vollkorn)' }}
             className="mb-10 inline-block max-w-[18ch] text-[36px] font-medium leading-[1.4] md:mb-16 md:text-[64px]"
           >
-            Learn how to make luxury inevitable.
+            Delve into the world of Luxury, one blog at a time.
           </h2>
         </div>
 
@@ -319,14 +319,14 @@ export default function Home() {
           data-hstrip
           onMouseEnter={() => (pausedRef.current = true)}
           onMouseLeave={() => (pausedRef.current = false)}
-          className="flex gap-7 overflow-x-auto px-5 pb-10 pt-5 md:px-16"
+          className="flex gap-7 overflow-x-auto pb-10 pt-5"
         >
           {POSTS.map((post) => (
             <BlogCard key={post.title} {...post} />
           ))}
         </div>
 
-        <div className="mx-auto flex max-w-[1200px] flex-col items-center gap-9 px-5 pt-[84px] md:px-16 md:pt-40">
+        <div className="mx-auto flex max-w-[1200px] flex-col items-center gap-9 pt-[84px] md:pt-40">
           <div ref={ctaTextRef} style={fade(ctaTextInView)}>
             <p className="max-w-[40ch] cursor-default text-center text-base leading-[1.6] text-parchment transition-[transform,color] duration-[400ms] ease-sw hover:scale-[1.03] hover:text-cognac md:text-xl">
               If you have read this far, you already know if this is for you.
