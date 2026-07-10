@@ -3,7 +3,12 @@
 import { useState } from 'react'
 import CTAButtons from './CTAButtons'
 
-const LINKS = ['The Work', 'The Blog', 'About', 'Work With Me'] as const
+const LINKS = [
+  { label: 'The Work', href: '/work' },
+  { label: 'The Blog', href: '#' },
+  { label: 'About', href: '#' },
+  { label: 'Work With Me', href: '#' },
+] as const
 
 export default function Footer() {
   const [ctaOpen, setCtaOpen] = useState(false)
@@ -12,19 +17,19 @@ export default function Footer() {
     <footer className="flex flex-col items-center gap-10 bg-aubergine px-6 pb-12 pt-[70px] md:px-16 md:pt-[120px]">
       <div className="flex flex-wrap items-baseline justify-center gap-5 md:gap-11">
         {LINKS.map((link) =>
-          link === 'Work With Me' ? (
+          link.label === 'Work With Me' ? (
             <button
-              key={link}
+              key={link.label}
               type="button"
               aria-expanded={ctaOpen}
               onClick={() => setCtaOpen((v) => !v)}
               className="cursor-pointer font-vollkorn text-2xl text-parchment md:text-[30px]"
             >
-              {link}
+              {link.label}
             </button>
           ) : (
-            <a key={link} href="#" className="font-vollkorn text-2xl text-parchment md:text-[30px]">
-              {link}
+            <a key={link.label} href={link.href} className="font-vollkorn text-2xl text-parchment md:text-[30px]">
+              {link.label}
             </a>
           )
         )}

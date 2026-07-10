@@ -2,7 +2,12 @@
 
 import { useEffect, useRef, useState } from 'react'
 
-const OVERLAY_LINKS = ['The Work', 'The Blog', 'About', 'Work With Me'] as const
+const OVERLAY_LINKS = [
+  { label: 'The Work', href: '/work' },
+  { label: 'The Blog', href: '#' },
+  { label: 'About', href: '#' },
+  { label: 'Work With Me', href: '#' },
+] as const
 
 interface RecentPost {
   title: string
@@ -104,11 +109,11 @@ export default function Nav({ bg, recentPosts }: NavProps) {
           <div className="flex flex-1 basis-[360px] flex-col gap-3">
             {OVERLAY_LINKS.map((link) => (
               <a
-                key={link}
-                href="#"
+                key={link.label}
+                href={link.href}
                 className="font-vollkorn text-[38px] leading-[1.1] text-parchment md:text-[72px]"
               >
-                {link}
+                {link.label}
               </a>
             ))}
           </div>
