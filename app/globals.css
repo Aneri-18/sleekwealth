@@ -13,6 +13,7 @@
     background: #120818;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
+    scrollbar-gutter: stable;
   }
 
   ::selection {

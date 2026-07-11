@@ -5,8 +5,8 @@ import CTAButtons from './CTAButtons'
 
 const LINKS = [
   { label: 'The Work', href: '/work' },
-  { label: 'The Blog', href: '#' },
-  { label: 'About', href: '#' },
+  { label: 'The Blog', href: '/blog' },
+  { label: 'About', href: '/about' },
   { label: 'Work With Me', href: '#' },
 ] as const
 

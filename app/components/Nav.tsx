@@ -1,11 +1,12 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
+import CTAButtons from './CTAButtons'
 
 const OVERLAY_LINKS = [
   { label: 'The Work', href: '/work' },
-  { label: 'The Blog', href: '#' },
-  { label: 'About', href: '#' },
+  { label: 'The Blog', href: '/blog' },
+  { label: 'About', href: '/about' },
   { label: 'Work With Me', href: '#' },
 ] as const
 
@@ -23,6 +24,7 @@ export default function Nav({ bg, recentPosts }: NavProps) {
   const [isOpen, setIsOpen] = useState(false)
   const [hidden, setHidden] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const [navCtaOpen, setNavCtaOpen] = useState(false)
   const lastY = useRef(0)
 
   useEffect(() => {
@@ -58,6 +60,10 @@ export default function Nav({ bg, recentPosts }: NavProps) {
     }
   }, [isOpen])
 
+  useEffect(() => {
+    if (!isOpen) setNavCtaOpen(false)
+  }, [isOpen])
+
   return (
     <>
       <nav
@@ -80,10 +86,10 @@ export default function Nav({ bg, recentPosts }: NavProps) {
           type="button"
           aria-label="Open menu"
           onClick={() => setIsOpen(true)}
-          className="flex w-[38px] flex-col gap-[7px] p-2"
+          className="flex h-10 w-10 flex-col items-center justify-center gap-[7px]"
         >
-          <span className="block h-[2.5px] w-full bg-parchment" />
-          <span className="block h-[2.5px] w-full bg-parchment" />
+          <span className="block h-[2.5px] w-6 bg-parchment" />
+          <span className="block h-[2.5px] w-6 bg-parchment" />
         </button>
       </nav>
 
@@ -99,7 +105,7 @@ export default function Nav({ bg, recentPosts }: NavProps) {
             type="button"
             aria-label="Close menu"
             onClick={() => setIsOpen(false)}
-            className="px-2.5 py-1.5 font-satoshi text-[26px] leading-none text-parchment"
+            className="flex h-10 w-10 items-center justify-center font-satoshi text-2xl leading-none text-parchment"
           >
             ×
           </button>
@@ -107,15 +113,34 @@ export default function Nav({ bg, recentPosts }: NavProps) {
 
         <div className="flex flex-1 flex-wrap items-end gap-16 px-5 pb-[60px] pt-6 md:px-16 md:pb-[90px]">
           <div className="flex flex-1 basis-[360px] flex-col gap-3">
-            {OVERLAY_LINKS.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                className="font-vollkorn text-[38px] leading-[1.1] text-parchment md:text-[72px]"
-              >
-                {link.label}
-              </a>
-            ))}
+            {OVERLAY_LINKS.map((link) =>
+              link.label === 'Work With Me' ? (
+                <div key={link.label} className="flex flex-col gap-4">
+                  <button
+                    type="button"
+                    aria-expanded={navCtaOpen}
+                    onClick={() => setNavCtaOpen((v) => !v)}
+                    className="text-left font-vollkorn text-[38px] leading-[1.1] text-parchment md:text-[72px]"
+                  >
+                    {link.label}
+                  </button>
+                  <div
+                    className="flex w-full max-w-[440px] flex-wrap gap-3.5 overflow-hidden transition-[max-height,opacity] duration-500 ease-sw"
+                    style={{ maxHeight: navCtaOpen ? 160 : 0, opacity: navCtaOpen ? 1 : 0 }}
+                  >
+                    <CTAButtons />
+                  </div>
+                </div>
+              ) : (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  className="font-vollkorn text-[38px] leading-[1.1] text-parchment md:text-[72px]"
+                >
+                  {link.label}
+                </a>
+              )
+            )}
           </div>
 
           <div className="flex flex-1 basis-[320px] flex-col gap-[22px]" style={{ maxWidth: 460 }}>
