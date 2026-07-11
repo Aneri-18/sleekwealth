@@ -30,9 +30,24 @@ const satoshi = localFont({
 
 const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: "Sleek Wealth — The Business of Luxury",
   description: "Sleek Wealth. The Business of Luxury.",
+  openGraph: {
+    title: "Sleek Wealth — The Business of Luxury",
+    description: "Sleek Wealth. The Business of Luxury.",
+    images: ["/images/og-card.png"],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Sleek Wealth — The Business of Luxury",
+    description: "Sleek Wealth. The Business of Luxury.",
+    images: ["/images/og-card.png"],
+  },
 };
 
 export default function RootLayout({
