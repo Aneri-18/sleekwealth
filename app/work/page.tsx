@@ -9,6 +9,7 @@ import BlogCard from '../components/BlogCard'
 import CTAButtons from '../components/CTAButtons'
 import { useInViewOnce } from '../hooks/useInViewOnce'
 import { PROGRAMS } from '../data/programs'
+import { getAllPosts } from '../data/posts'
 
 const AUBERGINE = '#120818'
 const BORDEAUX = '#4A0E1A'
@@ -21,16 +22,16 @@ const OUTCOMES = [
   'A brand that feels like it belongs where it charges.',
 ]
 
-const POSTS = [
-  { title: 'Why Premium and Luxury Are Not the Same Word', author: 'Aneri Shah', read: '6 min', offset: '0px' },
-  { title: 'The Price Is the Position', author: 'Aneri Shah', read: '4 min', offset: '48px' },
-  { title: 'What a Discount Actually Costs', author: 'Aneri Shah', read: '7 min', offset: '16px' },
-  { title: 'The Room Is Never Just a Room', author: 'Aneri Shah', read: '5 min', offset: '56px' },
-  { title: 'Founder Visibility, Brand Dilution', author: 'Aneri Shah', read: '8 min', offset: '8px' },
-  { title: 'Becoming Inevitable', author: 'Aneri Shah', read: '5 min', offset: '40px' },
-]
+const POSTS = getAllPosts().map((p, i) => ({
+  title: p.title,
+  author: p.authorName,
+  read: `${p.readingTime} min`,
+  offset: ['0px', '48px', '16px', '56px'][i % 4],
+  href: `/blog/${p.slug}`,
+  image: p.featuredImage,
+}))
 
-const NAV_POSTS = POSTS.slice(0, 3).map((p) => ({ title: p.title, href: '#' }))
+const NAV_POSTS = POSTS.slice(0, 3).map((p) => ({ title: p.title, href: p.href }))
 
 export default function Work() {
   const rootRef = useRef<HTMLDivElement>(null)
@@ -197,7 +198,7 @@ export default function Work() {
           className="flex gap-7 overflow-x-auto pb-10 pt-5"
         >
           {POSTS.map((post) => (
-            <BlogCard key={post.title} {...post} />
+            <BlogCard key={post.href} {...post} />
           ))}
         </div>
       </section>

@@ -1,9 +1,12 @@
+import Image from 'next/image'
+
 interface BlogCardProps {
   title: string
   author: string
   read: string
   offset: string
   href?: string
+  image?: string
 }
 
 export default function BlogCard({
@@ -12,6 +15,7 @@ export default function BlogCard({
   read,
   offset,
   href = '#',
+  image,
 }: BlogCardProps) {
   return (
     <a
@@ -19,10 +23,14 @@ export default function BlogCard({
       style={{ marginTop: offset, width: 'clamp(240px, 24vw, 300px)' }}
       className="group flex shrink-0 flex-col transition-transform duration-[400ms] ease-out hover:scale-[1.02]"
     >
-      <div className="flex aspect-[3/4] w-full items-center justify-center overflow-hidden rounded-sw bg-[repeating-linear-gradient(45deg,#3a0b14,#3a0b14_11px,#320a12_11px,#320a12_22px)]">
-        <span className="font-satoshi text-[11px] uppercase tracking-[0.12em] text-cognac">
-          Blog hero
-        </span>
+      <div className="relative flex aspect-[3/4] w-full items-center justify-center overflow-hidden rounded-sw bg-[repeating-linear-gradient(45deg,#3a0b14,#3a0b14_11px,#320a12_11px,#320a12_22px)]">
+        {image ? (
+          <Image src={image} alt="" fill sizes="300px" className="object-cover" />
+        ) : (
+          <span className="font-satoshi text-[11px] uppercase tracking-[0.12em] text-cognac">
+            Blog hero
+          </span>
+        )}
       </div>
       <div className="pt-5">
         <h3 className="font-vollkorn text-[22px] leading-[1.35] text-parchment">{title}</h3>
