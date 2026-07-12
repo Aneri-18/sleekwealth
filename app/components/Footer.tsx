@@ -4,6 +4,7 @@ import { useState } from 'react'
 import CTAButtons from './CTAButtons'
 
 const LINKS = [
+  { label: 'Home', href: '/' },
   { label: 'The Work', href: '/work' },
   { label: 'The Blog', href: '/blog' },
   { label: 'About', href: '/about' },
@@ -44,7 +45,12 @@ export default function Footer() {
       </div>
 
       <div className="flex gap-7">
-        <a href="#" className="font-satoshi text-[13px] tracking-[0.08em] text-cognac">
+        <a
+          href="https://www.linkedin.com/in/aneri-shah-312703134/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="font-satoshi text-[13px] tracking-[0.08em] text-cognac"
+        >
           LinkedIn
         </a>
         <a href="#" className="font-satoshi text-[13px] tracking-[0.08em] text-cognac">

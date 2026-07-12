@@ -75,14 +75,14 @@ export default function Nav({ bg, recentPosts }: NavProps) {
         }}
         className="fixed inset-x-0 top-0 z-[60] flex items-center justify-between px-5 py-7 transition-[transform,background-color] duration-300 ease-out md:px-16"
       >
-        <div className="flex flex-wrap items-baseline gap-3.5">
+        <a href="/" className="flex flex-wrap items-baseline gap-3.5">
           <span className="font-satoshi text-[15px] font-bold tracking-[0.22em] text-parchment">
             SLEEK WEALTH
           </span>
           <span className="hidden font-vollkorn text-base font-semibold italic text-cognac sm:inline">
             The Business of Luxury
           </span>
-        </div>
+        </a>
 
         <button
           type="button"
@@ -100,9 +100,12 @@ export default function Nav({ bg, recentPosts }: NavProps) {
         className="fixed inset-0 z-[80] flex flex-col overflow-y-auto bg-aubergine transition-opacity duration-[400ms] ease-sw"
       >
         <div className="flex items-center justify-between px-5 py-7 md:px-16">
-          <span className="font-satoshi text-[15px] font-bold tracking-[0.22em] text-parchment">
+          <a
+            href="/"
+            className="font-satoshi text-[15px] font-bold tracking-[0.22em] text-parchment"
+          >
             SLEEK WEALTH
-          </span>
+          </a>
           <button
             type="button"
             aria-label="Close menu"
