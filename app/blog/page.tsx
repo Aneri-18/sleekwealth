@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react'
 import Nav from '../components/Nav'
 import Footer from '../components/Footer'
 import BlogGalleryCard from '../components/BlogGalleryCard'
-import { getAllPosts } from '../data/posts'
+import { getAllPosts, getNavPosts } from '../data/posts'
 
 const AUBERGINE = '#120818'
 const BORDEAUX = '#4A0E1A'
@@ -15,7 +15,7 @@ const RATIOS: Record<string, string> = {
 
 const ALL_POSTS = getAllPosts()
 
-const NAV_POSTS = ALL_POSTS.slice(0, 3).map((p) => ({ title: p.title, href: `/blog/${p.slug}` }))
+const NAV_POSTS = getNavPosts()
 
 const GALLERY_POSTS = ALL_POSTS.map((p) => ({
   href: `/blog/${p.slug}`,

@@ -6,21 +6,13 @@ import Footer from '../components/Footer'
 import BlogCard from '../components/BlogCard'
 import CTAButtons from '../components/CTAButtons'
 import { useInViewOnce } from '../hooks/useInViewOnce'
-import { getAllPosts } from '../data/posts'
+import { getBlogStripCards, getNavPosts } from '../data/posts'
 
 const AUBERGINE = '#120818'
 const BORDEAUX = '#4A0E1A'
 
-const POSTS = getAllPosts().map((p, i) => ({
-  title: p.title,
-  author: p.authorName,
-  read: `${p.readingTime} min`,
-  offset: ['0px', '48px', '16px', '56px'][i % 4],
-  href: `/blog/${p.slug}`,
-  image: p.featuredImage,
-}))
-
-const NAV_POSTS = POSTS.slice(0, 3).map((p) => ({ title: p.title, href: p.href }))
+const POSTS = getBlogStripCards()
+const NAV_POSTS = getNavPosts()
 
 export default function About() {
   const rootRef = useRef<HTMLDivElement>(null)
@@ -79,14 +71,17 @@ export default function About() {
 
   const stripRef = useRef<HTMLDivElement>(null)
   const pausedRef = useRef(false)
+  const stripPosRef = useRef(0)
 
   useEffect(() => {
     let raf: number
     function loop() {
       const s = stripRef.current
       if (s && !pausedRef.current) {
-        if (s.scrollLeft >= s.scrollWidth - s.clientWidth - 1) s.scrollLeft = 0
-        else s.scrollLeft += 0.4
+        const max = s.scrollWidth - s.clientWidth
+        stripPosRef.current += 0.4
+        if (stripPosRef.current >= max) stripPosRef.current = 0
+        s.scrollLeft = stripPosRef.current
       }
       raf = requestAnimationFrame(loop)
     }

@@ -7,13 +7,12 @@ import Footer from '../../components/Footer'
 import BlogCard from '../../components/BlogCard'
 import CTAButtons from '../../components/CTAButtons'
 import { useInViewOnce } from '../../hooks/useInViewOnce'
-import { getAllPosts, type BlogPost } from '../../data/posts'
+import { getNavPosts, type BlogPost } from '../../data/posts'
 
 const AUBERGINE = '#120818'
 const BORDEAUX = '#4A0E1A'
 
-const ALL_POSTS = getAllPosts()
-const NAV_POSTS = ALL_POSTS.slice(0, 3).map((p) => ({ title: p.title, href: `/blog/${p.slug}` }))
+const NAV_POSTS = getNavPosts()
 
 interface BlogPostClientProps {
   post: BlogPost
@@ -153,6 +152,7 @@ export default function BlogPostClient({ post, related }: BlogPostClientProps) {
             alt={post.title}
             fill
             sizes="(max-width: 900px) 100vw, 1200px"
+            quality={95}
             className="object-cover"
             priority
           />

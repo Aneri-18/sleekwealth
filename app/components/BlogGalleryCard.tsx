@@ -46,6 +46,7 @@ export default function BlogGalleryCard({
         alt=""
         fill
         sizes="(max-width: 900px) 90vw, 420px"
+        quality={90}
         priority={priority}
         className="object-cover transition-transform duration-[400ms] ease-out group-hover:scale-[1.02]"
       />

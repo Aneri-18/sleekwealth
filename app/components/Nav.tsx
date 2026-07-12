@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
+import Image from 'next/image'
 import CTAButtons from './CTAButtons'
 
 const OVERLAY_LINKS = [
@@ -13,6 +14,7 @@ const OVERLAY_LINKS = [
 interface RecentPost {
   title: string
   href: string
+  image?: string
 }
 
 interface NavProps {
@@ -146,7 +148,11 @@ export default function Nav({ bg, recentPosts }: NavProps) {
           <div className="flex flex-1 basis-[320px] flex-col gap-[22px]" style={{ maxWidth: 460 }}>
             {recentPosts.map((post) => (
               <a key={post.title} href={post.href} className="flex items-center gap-[18px]">
-                <div className="h-16 w-16 shrink-0 rounded-sw bg-[repeating-linear-gradient(45deg,#1d1023,#1d1023_8px,#170c1d_8px,#170c1d_16px)]" />
+                <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-sw bg-[repeating-linear-gradient(45deg,#1d1023,#1d1023_8px,#170c1d_8px,#170c1d_16px)]">
+                  {post.image && (
+                    <Image src={post.image} alt="" fill sizes="64px" quality={90} className="object-cover" />
+                  )}
+                </div>
                 <div className="flex flex-1 flex-col gap-[5px]">
                   <span className="font-satoshi text-[11px] uppercase tracking-[0.18em] text-cognac">
                     Blog

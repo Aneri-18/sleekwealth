@@ -314,3 +314,51 @@ export function getRelatedPosts(slug: string, count = 3): BlogPost[] {
     .filter((p) => p.slug !== slug)
     .slice(0, count)
 }
+
+export interface NavPost {
+  title: string
+  href: string
+  image: string
+}
+
+export function getNavPosts(count = 3): NavPost[] {
+  return getAllPosts()
+    .slice(0, count)
+    .map((p) => ({ title: p.title, href: `/blog/${p.slug}`, image: p.featuredImage }))
+}
+
+export interface BlogStripCard {
+  title: string
+  author: string
+  read: string
+  offset: string
+  href: string
+  image?: string
+}
+
+const STRIP_OFFSETS = ['0px', '48px', '16px', '56px']
+
+// A horizontal auto-scroll strip needs its content wider than the viewport to have
+// anything to scroll through — pad with "see more" filler cards (no fabricated posts)
+// until there's enough real+filler width. Fillers disappear on their own once enough
+// real posts exist.
+export function getBlogStripCards(minCount = 5): BlogStripCard[] {
+  const cards: BlogStripCard[] = getAllPosts().map((p, i) => ({
+    title: p.title,
+    author: p.authorName,
+    read: `${p.readingTime} min`,
+    offset: STRIP_OFFSETS[i % STRIP_OFFSETS.length],
+    href: `/blog/${p.slug}`,
+    image: p.featuredImage,
+  }))
+  while (cards.length < minCount) {
+    cards.push({
+      title: 'More from the Blog.',
+      author: 'Sleek Wealth',
+      read: '',
+      offset: STRIP_OFFSETS[cards.length % STRIP_OFFSETS.length],
+      href: '/blog',
+    })
+  }
+  return cards
+}

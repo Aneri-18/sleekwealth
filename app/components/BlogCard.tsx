@@ -25,7 +25,7 @@ export default function BlogCard({
     >
       <div className="relative flex aspect-[3/4] w-full items-center justify-center overflow-hidden rounded-sw bg-[repeating-linear-gradient(45deg,#3a0b14,#3a0b14_11px,#320a12_11px,#320a12_22px)]">
         {image ? (
-          <Image src={image} alt="" fill sizes="300px" className="object-cover" />
+          <Image src={image} alt="" fill sizes="300px" quality={90} className="object-cover" />
         ) : (
           <span className="font-satoshi text-[11px] uppercase tracking-[0.12em] text-cognac">
             Blog hero
