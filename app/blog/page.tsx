@@ -21,7 +21,7 @@ const GALLERY_POSTS = ALL_POSTS.map((p) => ({
   href: `/blog/${p.slug}`,
   image: p.featuredImage,
   title: p.title,
-  date: new Date(p.publishedAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
+  date: new Date(p.publishedAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
   read: `${p.readingTime} min read`,
   author: p.authorName,
   category: p.category,

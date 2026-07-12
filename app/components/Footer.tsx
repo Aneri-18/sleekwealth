@@ -12,6 +12,7 @@ const LINKS = [
 
 export default function Footer() {
   const [ctaOpen, setCtaOpen] = useState(false)
+  const year = new Date().getFullYear()
 
   return (
     <footer className="flex flex-col items-center gap-10 bg-aubergine px-6 pb-12 pt-[70px] md:px-16 md:pt-[120px]">
@@ -52,7 +53,7 @@ export default function Footer() {
       </div>
 
       <p className="font-satoshi text-xs tracking-[0.04em] text-parchment/60">
-        © Sleek Wealth 2026. The Business of Luxury.
+        © Sleek Wealth {year}. The Business of Luxury.
       </p>
     </footer>
   )

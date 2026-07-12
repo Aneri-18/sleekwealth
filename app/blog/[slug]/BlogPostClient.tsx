@@ -6,7 +6,7 @@ import Nav from '../../components/Nav'
 import Footer from '../../components/Footer'
 import BlogCard from '../../components/BlogCard'
 import { useInViewOnce } from '../../hooks/useInViewOnce'
-import { getBlogStripCards, getFirstSentence, getNavPosts, type BlogPost } from '../../data/posts'
+import { getAdjacentPosts, getBlogStripCards, getFirstSentence, getNavPosts, type BlogPost } from '../../data/posts'
 
 const AUBERGINE = '#120818'
 const BORDEAUX = '#4A0E1A'
@@ -29,6 +29,7 @@ export default function BlogPostClient({ post }: BlogPostClientProps) {
   const [linkCopied, setLinkCopied] = useState(false)
 
   const POSTS = getBlogStripCards(5, post.slug)
+  const { previous, next } = getAdjacentPosts(post.slug)
 
   // Stable reference so the dangerouslySetInnerHTML div isn't reconciled (and its
   // manually-animated headings reset) on every unrelated re-render (e.g. shareUrl).
@@ -273,6 +274,34 @@ export default function BlogPostClient({ post }: BlogPostClientProps) {
           dangerouslySetInnerHTML={bodyHtmlProp}
         />
       </section>
+
+      {/* SECTION 3.5 — PREV / NEXT POST */}
+      {(previous || next) && (
+        <section data-bg="aubergine" className="px-5 pb-[60px] md:px-16">
+          <div className="mx-auto flex max-w-[720px] items-center justify-between border-t border-cognac/30 pt-8">
+            {previous ? (
+              <a
+                href={`/blog/${previous.slug}`}
+                className="text-[13px] font-semibold uppercase tracking-[0.14em] text-cognac transition-opacity duration-300 hover:opacity-70"
+              >
+                ← Previous
+              </a>
+            ) : (
+              <span />
+            )}
+            {next ? (
+              <a
+                href={`/blog/${next.slug}`}
+                className="text-[13px] font-semibold uppercase tracking-[0.14em] text-cognac transition-opacity duration-300 hover:opacity-70"
+              >
+                Next →
+              </a>
+            ) : (
+              <span />
+            )}
+          </div>
+        </section>
+      )}
 
       {/* SECTION 4 — SHARE + SOFT CTA */}
       <section data-bg="aubergine" className="px-5 pb-[90px] md:px-16 md:pb-[150px]">

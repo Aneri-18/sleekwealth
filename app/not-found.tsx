@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 
 export default function NotFound() {
   const [shown, setShown] = useState(false)
+  const year = new Date().getFullYear()
 
   useEffect(() => {
     const t = setTimeout(() => setShown(true), 150)
@@ -48,7 +49,7 @@ export default function NotFound() {
 
       <footer className="px-5 pb-10 text-center md:px-16">
         <span className="font-satoshi text-xs tracking-[0.04em] text-parchment/50">
-          © Sleek Wealth 2026. The Business of Luxury.
+          © Sleek Wealth {year}. The Business of Luxury.
         </span>
       </footer>
     </div>

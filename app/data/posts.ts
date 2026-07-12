@@ -332,9 +332,9 @@ export const POSTS: BlogPost[] = [
     authorName: 'Aneri Shah',
     authorTitle: 'Founder, Sleek Wealth',
     category: 'Luxury Strategy',
-    featuredImage: '/blog/discounting-in-luxury-a-positioning-decision/featured.svg',
-    featuredImageWidth: 1600,
-    featuredImageHeight: 2000,
+    featuredImage: '/blog/discounting-in-luxury-a-positioning-decision/featured.jpg',
+    featuredImageWidth: 1280,
+    featuredImageHeight: 960,
     publishedAt: '2026-07-05',
     readingTime: 2,
     status: 'published',
@@ -405,6 +405,23 @@ export function getRelatedPosts(slug: string, count = 3): BlogPost[] {
   return getAllPosts()
     .filter((p) => p.slug !== slug)
     .slice(0, count)
+}
+
+export interface AdjacentPosts {
+  previous: BlogPost | null
+  next: BlogPost | null
+}
+
+// Chronological order (oldest first) — "previous" is the post published just
+// before this one, "next" is the one published just after.
+export function getAdjacentPosts(slug: string): AdjacentPosts {
+  const chronological = [...getAllPosts()].reverse()
+  const index = chronological.findIndex((p) => p.slug === slug)
+  if (index === -1) return { previous: null, next: null }
+  return {
+    previous: index > 0 ? chronological[index - 1] : null,
+    next: index < chronological.length - 1 ? chronological[index + 1] : null,
+  }
 }
 
 export interface NavPost {
