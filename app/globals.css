@@ -34,3 +34,11 @@
 [data-hstrip] {
   scrollbar-width: none;
 }
+
+/* A tiny blocking script in <head> sets this attribute synchronously, before
+   first paint, if consent was already stored — hides the banner instantly so
+   it never flashes on returning-visitor page loads (full reloads, since this
+   site uses plain <a> navigation rather than client-side routing). */
+html[data-cookie-consent] [data-cookie-banner] {
+  display: none;
+}

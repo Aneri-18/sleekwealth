@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import { Vollkorn } from "next/font/google";
 import localFont from "next/font/local";
-import Script from "next/script";
 import "./globals.css";
+import Analytics from "./components/Analytics";
 import CookieBanner from "./components/CookieBanner";
+import { STORAGE_KEY } from "./lib/cookieConsent";
 
 const vollkorn = Vollkorn({
   variable: "--font-vollkorn",
@@ -56,24 +57,26 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${vollkorn.variable} ${satoshi.variable}`}>
+    <html
+      lang="en"
+      className={`${vollkorn.variable} ${satoshi.variable}`}
+      suppressHydrationWarning
+    >
       <body className="bg-aubergine text-parchment font-satoshi min-h-screen">
-        {GA_MEASUREMENT_ID && (
-          <>
-            <Script
-              src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
-              strategy="afterInteractive"
-            />
-            <Script id="ga4-init" strategy="afterInteractive">
-              {`
-                window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
-                gtag('js', new Date());
-                gtag('config', '${GA_MEASUREMENT_ID}');
-              `}
-            </Script>
-          </>
-        )}
+        {/* A raw literal <script> (not next/script — that goes through Next's
+            own RSC runtime bootstrap first, which is too late to beat first
+            paint). The browser's HTML parser executes this synchronously as
+            it parses <body>, before the banner below gets painted — if
+            consent was already stored, it marks <html> so the CSS rule in
+            globals.css hides the banner instantly instead of flashing it on
+            every page load (this site navigates via full page loads, not
+            client-side routing, so this check runs fresh on every request). */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `try{if(localStorage.getItem(${JSON.stringify(STORAGE_KEY)})){document.documentElement.setAttribute('data-cookie-consent','1')}}catch(e){}`,
+          }}
+        />
+        {GA_MEASUREMENT_ID && <Analytics gaId={GA_MEASUREMENT_ID} />}
         {children}
         <CookieBanner />
       </body>

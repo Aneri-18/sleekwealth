@@ -1,8 +1,7 @@
 'use client'
 
 import { useState, useSyncExternalStore } from 'react'
-
-const STORAGE_KEY = 'sw_cookie'
+import { CONSENT_EVENT, STORAGE_KEY } from '../lib/cookieConsent'
 
 function subscribe(callback: () => void) {
   window.addEventListener('storage', callback)
@@ -23,13 +22,16 @@ export default function CookieBanner() {
 
   const respond = (choice: 'accepted' | 'rejected') => {
     localStorage.setItem(STORAGE_KEY, choice)
+    // 'storage' only fires in *other* tabs, never the tab that made the change —
+    // dispatch our own event so same-tab listeners (e.g. Analytics) react immediately.
+    window.dispatchEvent(new CustomEvent(CONSENT_EVENT, { detail: choice }))
     setDismissed(true)
   }
 
   if (consent || dismissed) return null
 
   return (
-    <div className="fixed inset-x-0 bottom-0 z-[70] flex justify-center p-4">
+    <div data-cookie-banner className="fixed inset-x-0 bottom-0 z-[70] flex justify-center p-4">
       <div className="flex max-w-[760px] flex-wrap items-center gap-x-5 gap-y-3.5 rounded-sw border border-cognac bg-aubergine px-[18px] py-[14px] shadow-[0_12px_40px_rgba(0,0,0,0.45)]">
         <span className="flex-1 basis-[280px] font-satoshi text-[13px] leading-[1.5] text-parchment">
           We use cookies to understand how this site is used.
