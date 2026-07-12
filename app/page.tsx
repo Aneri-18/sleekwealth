@@ -193,7 +193,7 @@ export default function Home() {
 
       {/* SECTION 2 — EXPANDING CONTAINER + INTRO */}
       <section data-bg="aubergine" className="flex flex-col items-center px-5 pb-[36px] pt-20 md:px-16 md:pb-[65px] md:pt-40">
-        <ExpandingContainer placeholderLabel="Editorial still — piano, single light source (image or video)" />
+        <ExpandingContainer imageSrc="/homepage/piano-hero.png" alt="A grand piano lit by a single overhead light in an elegant, curved marble room" />
         <div
           ref={introRef}
           style={fade(introInView)}

@@ -51,7 +51,7 @@ export default function ExpandingContainer({
   const hasAsset = Boolean(imageSrc || videoSrc)
 
   return (
-    <div ref={wrapperRef} className="flex justify-center">
+    <div ref={wrapperRef} className="flex w-full justify-center">
       <div
         className="aspect-[3/4] overflow-hidden rounded-sw transition-[width] duration-[250ms] ease-out md:aspect-[16/9]"
         style={{ width: `${width}%`, maxWidth: 1200 }}
@@ -69,7 +69,7 @@ export default function ExpandingContainer({
               playsInline
             />
           ) : imageSrc ? (
-            <Image src={imageSrc} alt={alt} fill sizes="92vw" className="object-cover" />
+            <Image src={imageSrc} alt={alt} fill unoptimized className="object-cover" />
           ) : null}
           {!hasAsset && placeholderLabel && (
             <span className="relative px-8 text-center font-satoshi text-xs uppercase tracking-[0.14em] text-cognac">
