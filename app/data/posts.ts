@@ -1,10 +1,32 @@
+// The four controlled content-category tags. Every post's `category` must be
+// exactly one of these — no per-post variants (e.g. no "— Part 2" suffixes).
+export const BLOG_CATEGORIES = [
+  'The Luxury Spectrum™',
+  'Market Intelligence',
+  'Brand Diagnosis',
+  'Luxury Strategy',
+] as const
+
+export type BlogCategory = (typeof BLOG_CATEGORIES)[number]
+
+// URL/slug-safe version of a category name — strips the ™ symbol rather than
+// leaving it in a URL, and normalizes to lowercase-hyphenated form.
+export function categorySlug(category: BlogCategory): string {
+  return category
+    .replace(/™/g, '')
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/(^-|-$)/g, '')
+}
+
 export interface BlogPost {
   slug: string
   title: string
   subtitle: string
   authorName: string
   authorTitle: string
-  category: string
+  category: BlogCategory
   featuredImage: string
   featuredImageWidth: number
   featuredImageHeight: number
@@ -12,8 +34,8 @@ export interface BlogPost {
   readingTime: number
   bodyHtml: string
   status: 'draft' | 'published'
-  // On-page subheading normally auto-derives from the post's own first sentence
-  // (see getFirstSentence). Set this to hand-write it instead for a specific post.
+  // Hand-written on-page subheading — every post currently sets this explicitly.
+  // If unset, falls back to the post's own first sentence (see getFirstSentence).
   subheadingOverride?: string
 }
 
@@ -25,7 +47,7 @@ export const POSTS: BlogPost[] = [
       'What Q1 2026 earnings reveal about brand positioning and what most brands are still refusing to admit.',
     authorName: 'Aneri Shah',
     authorTitle: 'Founder, Sleek Wealth',
-    category: 'Market Analysis',
+    category: 'Market Intelligence',
     featuredImage: '/blog/the-great-luxury-collapse-of-2026-and-who-survived-it-unfettered/featured.png',
     featuredImageWidth: 6250,
     featuredImageHeight: 4830,
@@ -86,7 +108,7 @@ export const POSTS: BlogPost[] = [
     subtitle: 'This is Part 3 of The Luxury Spectrum™ series.',
     authorName: 'Aneri Shah',
     authorTitle: 'Founder, Sleek Wealth',
-    category: 'The Luxury Spectrum™ — Part 3',
+    category: 'The Luxury Spectrum™',
     featuredImage:
       '/blog/the-five-types-of-luxury-brands-and-why-the-better-ones-never-fit-into-just-one/featured.png',
     featuredImageWidth: 1672,
@@ -193,7 +215,7 @@ export const POSTS: BlogPost[] = [
     subtitle: 'And why getting them wrong costs everything. This is a breakdown of the consumer side of The Luxury Spectrum™.',
     authorName: 'Aneri Shah',
     authorTitle: 'Founder, Sleek Wealth',
-    category: 'The Luxury Spectrum™ — Part 2',
+    category: 'The Luxury Spectrum™',
     featuredImage: '/blog/the-three-types-of-luxury-consumers/featured.png',
     featuredImageWidth: 1023,
     featuredImageHeight: 1537,
@@ -260,7 +282,7 @@ export const POSTS: BlogPost[] = [
     subtitle: 'What on earth is luxury? The question nobody is asking correctly.',
     authorName: 'Aneri Shah',
     authorTitle: 'Founder, Sleek Wealth',
-    category: 'The Luxury Spectrum™ — Part 1',
+    category: 'The Luxury Spectrum™',
     featuredImage: '/blog/the-multifaceted-guise-of-luxury/featured.png',
     featuredImageWidth: 1448,
     featuredImageHeight: 1086,
@@ -301,6 +323,39 @@ export const POSTS: BlogPost[] = [
 <p>Starting with the consumer side. Three types. Three completely different relationships with luxury. And three completely different reasons to buy.</p>
 <p>If you are a luxury brand decision-maker, a business owner in the premium space, or simply someone who has always been fascinated by how luxury actually works &mdash; this series is for you.</p>
 <p>Simply follow along. The most interesting part is just beginning.</p>
+`.trim(),
+  },
+  {
+    slug: 'discounting-in-luxury-a-positioning-decision',
+    title: 'In the World of Luxury, Discounting Is a Disservice.',
+    subtitle: 'Discounting is a positioning decision (a wrong one).',
+    authorName: 'Aneri Shah',
+    authorTitle: 'Founder, Sleek Wealth',
+    category: 'Luxury Strategy',
+    featuredImage: '/blog/discounting-in-luxury-a-positioning-decision/featured.svg',
+    featuredImageWidth: 1600,
+    featuredImageHeight: 2000,
+    publishedAt: '2026-07-05',
+    readingTime: 2,
+    status: 'published',
+    subheadingOverride: 'Discounting is a positioning decision (a wrong one).',
+    bodyHtml: `
+<p>Every luxury brand eventually faces the same moment. Inventory sits. Perhaps, a quarter underperforms. And someone proposes the obvious fix, a discount that is modest and temporary.</p>
+<p>This post exists for that moment.</p>
+<p>Because discounting in luxury is not a tactical decision, but a structural one. Its consequences do not resolve when the sale ends. They compound.</p>
+<p>Here is what a single discount actually costs. Seven consequences, excerpt:</p>
+<ol>
+<li>The loyalist's faith is withdrawn. A consumer who paid full price interprets a later discount as a retroactive judgment on their own decision. The product has not changed. Their relationship to it has.</li>
+<li>The aspirational consumer loses the object of pursuit. Aspiration requires a fixed point. A brand that discounts has relocated that point. This produces disorientation, not gratitude.</li>
+<li>Reverence dissipates beyond the consumer base. The observer who maintained a brand's reputation through reference alone, without ever transacting, also withdraws. Once a brand becomes accessible by discount, its status as untouchable cannot be retroactively restored.</li>
+<li>Discounting signals a demand failure. It communicates, regardless of intent, that demand at full price was insufficient. In luxury, where desirability is the product, this is a positioning statement, not a sales metric.</li>
+<li>Discounting signals a production miscalculation. Brands operating at the highest levels of positioning produce deliberately below anticipated demand. Surplus inventory indicates that principle was already violated.</li>
+<li>Discounting prioritises margin over integrity. Luxury is defined by the coherence between what a product is and what it is priced to represent. A discount severs that coherence in exchange for a quarter's recovery.</li>
+<li>Discounting devalues the labour behind the product. Every luxury object carries years of accumulated craft. A discount reduces that value to a percentage, applied indiscriminately.</li>
+</ol>
+<p>Discounting in luxury is rarely a commercial decision. It is ALWAYS a positioning decision, and an almost always irreversible one.</p>
+<p>Coach, Burberry, and Michael Kors each spent years and significant resources trying to recover ground that one decision surrendered.</p>
+<p>The brands that never discounted required no recovery. Their position remained, by design, undisturbed.</p>
 `.trim(),
   },
 ]
