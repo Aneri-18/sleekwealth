@@ -6,10 +6,15 @@ export interface BlogPost {
   authorTitle: string
   category: string
   featuredImage: string
+  featuredImageWidth: number
+  featuredImageHeight: number
   publishedAt: string
   readingTime: number
   bodyHtml: string
   status: 'draft' | 'published'
+  // On-page subheading normally auto-derives from the post's own first sentence
+  // (see getFirstSentence). Set this to hand-write it instead for a specific post.
+  subheadingOverride?: string
 }
 
 export const POSTS: BlogPost[] = [
@@ -22,9 +27,13 @@ export const POSTS: BlogPost[] = [
     authorTitle: 'Founder, Sleek Wealth',
     category: 'Market Analysis',
     featuredImage: '/blog/the-great-luxury-collapse-of-2026-and-who-survived-it-unfettered/featured.png',
+    featuredImageWidth: 6250,
+    featuredImageHeight: 4830,
     publishedAt: '2026-06-24',
     readingTime: 3,
     status: 'published',
+    subheadingOverride:
+      'What Q1 2026 earnings reveal about brand positioning and what most brands are still refusing to admit.',
     bodyHtml: `
 <p>The Q1 2026 earnings season just handed the luxury industry its clearest lesson in positioning in over a decade.</p>
 <p>Three of the world's largest luxury conglomerates reported in the same week of April 2026. LVMH, Kering, and Herm&egrave;s. The verdict was not a sector crisis. It was a positioning crisis, marked as a sector crisis.</p>
@@ -46,7 +55,7 @@ export const POSTS: BlogPost[] = [
 <p>There is nothing wrong with marketing or expanding, only when it doesn't come at the cost of diluting positioning.</p>
 <p>The brands that are thriving are the ones that never moved.</p>
 <h2>What The Luxury Spectrum&trade; Shows</h2>
-<figure style="margin:0;display:flex;flex-direction:column;gap:0.75rem;">
+<figure style="margin:2.5rem 0;display:flex;flex-direction:column;gap:0.75rem;">
 <img src="/blog/the-great-luxury-collapse-of-2026-and-who-survived-it-unfettered/gallery-1.png" alt="A dark leather box displayed on a stone pedestal under a single spotlight in a dimly lit room" width="1672" height="941" loading="lazy" style="width:100%;height:auto;border-radius:10px;display:block;" />
 </figure>
 <p>This is not a coincidence. This is The Luxury Spectrum&trade; in real time.</p>
@@ -80,9 +89,12 @@ export const POSTS: BlogPost[] = [
     category: 'The Luxury Spectrum™ — Part 3',
     featuredImage:
       '/blog/the-five-types-of-luxury-brands-and-why-the-better-ones-never-fit-into-just-one/featured.png',
+    featuredImageWidth: 1672,
+    featuredImageHeight: 941,
     publishedAt: '2026-06-11',
     readingTime: 7,
     status: 'published',
+    subheadingOverride: 'Tiered Luxury masterfully executed, almost always wins.',
     bodyHtml: `
 <p>Two things have been established in this series. Luxury is not a singular concept. And the luxury consumer is not one person.</p>
 <p>In the first two parts we mapped three distinct consumer types &mdash; Access, Ownership, and Logos &mdash; each with a different relationship with luxury and a different reason to buy.</p>
@@ -93,7 +105,7 @@ export const POSTS: BlogPost[] = [
 <h2>The Five Levels</h2>
 <p>The Luxury Spectrum&trade; maps brands across five levels of positioning. Not price. Positioning. Price is merely a byproduct of where you sit on The Luxury Spectrum&trade;, never the lead.</p>
 <h2>Level 1 &mdash; Bespoke</h2>
-<figure style="margin:0;display:flex;flex-direction:column;gap:0.75rem;">
+<figure style="margin:2.5rem 0;display:flex;flex-direction:column;gap:0.75rem;">
 <img src="/blog/the-five-types-of-luxury-brands-and-why-the-better-ones-never-fit-into-just-one/gallery-1-bespoke.png" alt="The Luxury Spectrum diagram, showing five brand positioning levels from Bespoke to Accessible" width="6250" height="4830" loading="lazy" style="width:100%;height:auto;border-radius:10px;display:block;" />
 <figcaption style="font-family:var(--font-satoshi);font-size:13px;color:rgba(237,232,220,0.6);text-align:center;">The Luxury Spectrum&trade;</figcaption>
 </figure>
@@ -104,7 +116,7 @@ export const POSTS: BlogPost[] = [
 <p><strong>Graff of London</strong> offers highly personalized bespoke services, allowing clients to co-create one-of-a-kind High Jewelry. The process, right from selecting rare diamonds to shaping bespoke mounts and personalizing engravings, is tailored to the individual, bringing their unique story to life. Each piece conceived for a specific story and a specific life.</p>
 <p>Bespoke brands earn the right to be chosen through decades of uncompromising craft. What they make for you cannot be made for anyone else. That irreplaceability is the entire foundation.</p>
 <h2>Level 2 &mdash; Coveted</h2>
-<figure style="margin:0;display:flex;flex-direction:column;gap:0.75rem;">
+<figure style="margin:2.5rem 0;display:flex;flex-direction:column;gap:0.75rem;">
 <img src="/blog/the-five-types-of-luxury-brands-and-why-the-better-ones-never-fit-into-just-one/gallery-2-coveted.png" alt="The Luxury Spectrum diagram with Coveted highlighted as the second brand positioning level" width="6251" height="2841" loading="lazy" style="width:100%;height:auto;border-radius:10px;display:block;" />
 <figcaption style="font-family:var(--font-satoshi);font-size:13px;color:rgba(237,232,220,0.6);text-align:center;">The Luxury Spectrum&trade; &mdash; Coveted</figcaption>
 </figure>
@@ -115,7 +127,7 @@ export const POSTS: BlogPost[] = [
 <p><strong>Van Cleef &amp; Arpels Mystery Set (Serti Myst&eacute;rieux)</strong> pieces take months to construct. The technique so intricate that no visible settings remain, only an unbroken surface of stone. Acquiring a new Mystery Set creation functions more like an invitation-only queue for VIP clients, which can stretch for years together.</p>
 <p>This is a level of craft that cannot be scaled, and has never been replicated. The Coveted brand measures its success not by how many people own it but by how many people never will.</p>
 <h2>Level 3 &mdash; Established</h2>
-<figure style="margin:0;display:flex;flex-direction:column;gap:0.75rem;">
+<figure style="margin:2.5rem 0;display:flex;flex-direction:column;gap:0.75rem;">
 <img src="/blog/the-five-types-of-luxury-brands-and-why-the-better-ones-never-fit-into-just-one/gallery-3-established.png" alt="The Luxury Spectrum diagram with Established highlighted as the third brand positioning level" width="6251" height="2841" loading="lazy" style="width:100%;height:auto;border-radius:10px;display:block;" />
 <figcaption style="font-family:var(--font-satoshi);font-size:13px;color:rgba(237,232,220,0.6);text-align:center;">The Luxury Spectrum&trade; &mdash; Established</figcaption>
 </figure>
@@ -131,7 +143,7 @@ export const POSTS: BlogPost[] = [
 <p><strong>Manish Malhotra of India</strong> with almost thirty years of dressing Bollywood royalty with a brand language so consistent yet so eloquent that his name has become synonymous with Indian occasion wear at its finest.</p>
 <p>The Established brand earns its authority slowly. And guards it with everything.</p>
 <h2>Level 4 &mdash; Aspirational</h2>
-<figure style="margin:0;display:flex;flex-direction:column;gap:0.75rem;">
+<figure style="margin:2.5rem 0;display:flex;flex-direction:column;gap:0.75rem;">
 <img src="/blog/the-five-types-of-luxury-brands-and-why-the-better-ones-never-fit-into-just-one/gallery-4-aspirational.png" alt="The Luxury Spectrum diagram with Aspirational highlighted as the fourth brand positioning level" width="6251" height="2841" loading="lazy" style="width:100%;height:auto;border-radius:10px;display:block;" />
 <figcaption style="font-family:var(--font-satoshi);font-size:13px;color:rgba(237,232,220,0.6);text-align:center;">The Luxury Spectrum&trade; &mdash; Aspirational</figcaption>
 </figure>
@@ -144,7 +156,7 @@ export const POSTS: BlogPost[] = [
 <p><strong>Burberry of London</strong>, specifically the trench coat, a garment so deeply embedded in cultural memory that it holds its Aspirational positioning even as the rest of the house recovers from years of strategic drift.</p>
 <p>The Aspirational brand earns its position through the art of being just out of reach; close enough to want, far enough to mean something.</p>
 <h2>Level 5 &mdash; Accessible</h2>
-<figure style="margin:0;display:flex;flex-direction:column;gap:0.75rem;">
+<figure style="margin:2.5rem 0;display:flex;flex-direction:column;gap:0.75rem;">
 <img src="/blog/the-five-types-of-luxury-brands-and-why-the-better-ones-never-fit-into-just-one/gallery-5-accessible.png" alt="The Luxury Spectrum diagram with Accessible highlighted as the fifth brand positioning level" width="6251" height="2841" loading="lazy" style="width:100%;height:auto;border-radius:10px;display:block;" />
 <figcaption style="font-family:var(--font-satoshi);font-size:13px;color:rgba(237,232,220,0.6);text-align:center;">The Luxury Spectrum&trade; &mdash; Accessible</figcaption>
 </figure>
@@ -183,9 +195,12 @@ export const POSTS: BlogPost[] = [
     authorTitle: 'Founder, Sleek Wealth',
     category: 'The Luxury Spectrum™ — Part 2',
     featuredImage: '/blog/the-three-types-of-luxury-consumers/featured.png',
+    featuredImageWidth: 1023,
+    featuredImageHeight: 1537,
     publishedAt: '2026-05-27',
     readingTime: 4,
     status: 'published',
+    subheadingOverride: 'There is no 4th category.',
     bodyHtml: `
 <p>In the last piece, I introduced The Luxury Spectrum&trade;, a framework for understanding the luxury market from both sides. The Brand side and the Consumer side.</p>
 <p>Today we go inside the Consumer.</p>
@@ -193,7 +208,7 @@ export const POSTS: BlogPost[] = [
 <p>They are not.</p>
 <p>The luxury consumer is three distinct people. Three completely different relationships with luxury. Three completely different reasons to buy. And the brand that cannot tell them apart will always be speaking into the wrong room.</p>
 <h2>Type 1 &mdash; Access</h2>
-<figure style="margin:0;display:flex;flex-direction:column;gap:0.75rem;">
+<figure style="margin:2.5rem 0;display:flex;flex-direction:column;gap:0.75rem;">
 <img src="/blog/the-three-types-of-luxury-consumers/gallery-1-access.png" alt="A reserved table set for fine dining in an ornate restaurant, with a 'Reserved' place card" width="1672" height="941" loading="lazy" style="width:100%;height:auto;border-radius:10px;display:block;" />
 </figure>
 <p>This is the rarest luxury consumer in the world. And the most misunderstood.</p>
@@ -206,7 +221,7 @@ export const POSTS: BlogPost[] = [
 <p>What makes this consumer so difficult for brands to reach is not their wealth. It is their complete indifference to being marketed to. They are not looking for your brand. They are waiting to see if your brand is worthy of them.</p>
 <p>The implication for luxury brands is significant. If you are marketing visibility to this consumer &mdash; you have already lost them. They do not want to be seen owning your product. They want to feel that your product understands them. There is a profound difference between those two things.</p>
 <h2>Type 2 &mdash; Ownership</h2>
-<figure style="margin:0;display:flex;flex-direction:column;gap:0.75rem;">
+<figure style="margin:2.5rem 0;display:flex;flex-direction:column;gap:0.75rem;">
 <img src="/blog/the-three-types-of-luxury-consumers/gallery-2-ownership.png" alt="A man in a suit fastening a Rolex watch beside its open presentation box on a desk" width="1672" height="941" loading="lazy" style="width:100%;height:auto;border-radius:10px;display:block;" />
 </figure>
 <p>The Ownership consumer is perhaps the most commercially important luxury consumer in the market today.</p>
@@ -218,7 +233,7 @@ export const POSTS: BlogPost[] = [
 <p>This distinction matters enormously because the Ownership consumer responds to completely different brand signals than the Access consumer. They respond to heritage, to craft, to the story of the object. They want to know what they are buying into &mdash; not just what they are buying.</p>
 <p>Brands that understand this do not just sell a product to the Ownership consumer. They sell membership into a world they have always wanted to inhabit.</p>
 <h2>Type 3 &mdash; Logos</h2>
-<figure style="margin:0;display:flex;flex-direction:column;gap:0.75rem;">
+<figure style="margin:2.5rem 0;display:flex;flex-direction:column;gap:0.75rem;">
 <img src="/blog/the-three-types-of-luxury-consumers/gallery-3-logos.png" alt="A woman walking past a luxury boutique carrying shopping bags from Chanel, Gucci, and Giorgio Armani" width="1672" height="941" loading="lazy" style="width:100%;height:auto;border-radius:10px;display:block;" />
 </figure>
 <p>The Logos consumer is the most visible luxury consumer in the market. And the most judged.</p>
@@ -247,9 +262,12 @@ export const POSTS: BlogPost[] = [
     authorTitle: 'Founder, Sleek Wealth',
     category: 'The Luxury Spectrum™ — Part 1',
     featuredImage: '/blog/the-multifaceted-guise-of-luxury/featured.png',
+    featuredImageWidth: 1448,
+    featuredImageHeight: 1086,
     publishedAt: '2026-05-19',
-    readingTime: 4,
+    readingTime: 3,
     status: 'published',
+    subheadingOverride: 'What on earth is luxury? The question nobody is asking intentionally.',
     bodyHtml: `
 <p>Luxury is one of the most used&mdash;and most misunderstood&mdash;words in the business world today. Every brand wants to claim it. Every consumer wants to embody it. Yet, ask ten people what luxury actually means, and you will get ten completely different answers.</p>
 <p>That's hardly a coincidence; it's more of an unsolved equation.</p>
@@ -272,7 +290,7 @@ export const POSTS: BlogPost[] = [
 <li><strong>The Consumer Side</strong>: This divides luxury buyers into three distinct types based on what they are actually seeking when they purchase: Access, Ownership, and Logos.</li>
 <li><strong>The Brand Side</strong>: This maps luxury brands across five levels based on exclusivity, distribution, and the consumer relationship they are built to serve: Bespoke, Coveted, Established, Aspirational, and Accessible.</li>
 </ol>
-<figure style="margin:0;display:flex;flex-direction:column;gap:0.75rem;">
+<figure style="margin:2.5rem 0;display:flex;flex-direction:column;gap:0.75rem;">
 <img src="/blog/the-multifaceted-guise-of-luxury/gallery-1-spectrum-overview.png" alt="The Luxury Spectrum diagram, showing the five brand positioning levels and three consumer types" width="6250" height="4830" loading="lazy" style="width:100%;height:auto;border-radius:10px;display:block;" />
 <figcaption style="font-family:var(--font-satoshi);font-size:13px;color:rgba(237,232,220,0.6);text-align:center;">The Luxury Spectrum&trade;</figcaption>
 </figure>
@@ -283,21 +301,40 @@ export const POSTS: BlogPost[] = [
 <p>Starting with the consumer side. Three types. Three completely different relationships with luxury. And three completely different reasons to buy.</p>
 <p>If you are a luxury brand decision-maker, a business owner in the premium space, or simply someone who has always been fascinated by how luxury actually works &mdash; this series is for you.</p>
 <p>Simply follow along. The most interesting part is just beginning.</p>
-<h2>The Language of Luxury</h2>
-<p>Understanding luxury is not just about recognizing its various forms. It is also about mastering the unique language that surrounds it. This language is nuanced and often subtle. It encompasses everything from branding to customer service.</p>
-<h3>The Importance of Brand Storytelling</h3>
-<p>Luxury brands thrive on storytelling. A compelling narrative can elevate a brand from ordinary to extraordinary. It creates an emotional connection with consumers. This connection is what drives loyalty and repeat purchases.</p>
-<h3>Crafting the Perfect Experience</h3>
-<p>Luxury is not just a product; it is an experience. Every touchpoint matters. From the moment a consumer interacts with a brand, they should feel the essence of luxury. This includes everything from packaging to customer service.</p>
-<h3>The Role of Exclusivity</h3>
-<p>Exclusivity is a key component of luxury. It creates a sense of belonging among consumers. When a brand offers limited editions or private events, it reinforces the idea that luxury is not for everyone. This strategy can enhance the brand's allure.</p>
-<h3>Conclusion</h3>
-<p>In conclusion, luxury is a complex and multifaceted concept. It varies from person to person and brand to brand. By understanding the nuances of luxury, brands can position themselves more effectively in the market. The Luxury Spectrum&trade; provides a valuable framework for navigating this landscape.</p>
-<p>As we delve deeper into this series, I invite you to reflect on your own relationship with luxury. What does it mean to you? How do you express it in your life?</p>
-<p>Stay tuned for more insights and discussions on this captivating topic.</p>
 `.trim(),
   },
 ]
+
+const HTML_ENTITIES: Record<string, string> = {
+  amp: '&',
+  mdash: '—',
+  ndash: '–',
+  rsquo: '’',
+  lsquo: '‘',
+  rdquo: '”',
+  ldquo: '“',
+  trade: '™',
+  eacute: 'é',
+  egrave: 'è',
+  euro: '€',
+  nbsp: ' ',
+  hellip: '…',
+  quot: '"',
+  apos: "'",
+}
+
+// Derives the on-page subheading from the post's own opening line, rather than
+// duplicating a hand-written blurb — keeps it truthful to what the post actually opens with.
+export function getFirstSentence(bodyHtml: string): string {
+  const firstParagraph = bodyHtml.match(/<p[^>]*>([\s\S]*?)<\/p>/)
+  if (!firstParagraph) return ''
+  const plainText = firstParagraph[1]
+    .replace(/<[^>]+>/g, '')
+    .replace(/&([a-zA-Z]+);/g, (entity, name) => HTML_ENTITIES[name] ?? entity)
+    .trim()
+  const sentenceMatch = plainText.match(/^.*?[.!?](?=\s|$)/)
+  return sentenceMatch ? sentenceMatch[0].trim() : plainText
+}
 
 export function getAllPosts(): BlogPost[] {
   return POSTS.filter((p) => p.status === 'published').sort(
@@ -342,15 +379,18 @@ const STRIP_OFFSETS = ['0px', '48px', '16px', '56px']
 // (that's /blog), so it neither shrinks awkwardly nor grows unbounded as posts publish.
 // Pad with "see more" filler cards (no fabricated posts) until there's enough real+filler
 // width to scroll; fillers disappear on their own once enough real posts exist.
-export function getBlogStripCards(count = 7): BlogStripCard[] {
-  const cards: BlogStripCard[] = getAllPosts().slice(0, count).map((p, i) => ({
-    title: p.title,
-    author: p.authorName,
-    read: `${p.readingTime} min`,
-    offset: STRIP_OFFSETS[i % STRIP_OFFSETS.length],
-    href: `/blog/${p.slug}`,
-    image: p.featuredImage,
-  }))
+export function getBlogStripCards(count = 7, excludeSlug?: string): BlogStripCard[] {
+  const cards: BlogStripCard[] = getAllPosts()
+    .filter((p) => p.slug !== excludeSlug)
+    .slice(0, count)
+    .map((p, i) => ({
+      title: p.title,
+      author: p.authorName,
+      read: `${p.readingTime} min`,
+      offset: STRIP_OFFSETS[i % STRIP_OFFSETS.length],
+      href: `/blog/${p.slug}`,
+      image: p.featuredImage,
+    }))
   let fillerN = 0
   while (cards.length < count) {
     cards.push({

@@ -1,33 +1,47 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import Image from 'next/image'
 import Nav from '../../components/Nav'
 import Footer from '../../components/Footer'
 import BlogCard from '../../components/BlogCard'
-import CTAButtons from '../../components/CTAButtons'
 import { useInViewOnce } from '../../hooks/useInViewOnce'
-import { getNavPosts, type BlogPost } from '../../data/posts'
+import { getBlogStripCards, getFirstSentence, getNavPosts, type BlogPost } from '../../data/posts'
 
 const AUBERGINE = '#120818'
 const BORDEAUX = '#4A0E1A'
+const WHATSAPP_NUMBER = '919987357331'
 
 const NAV_POSTS = getNavPosts()
 
 interface BlogPostClientProps {
   post: BlogPost
-  related: BlogPost[]
 }
 
-export default function BlogPostClient({ post, related }: BlogPostClientProps) {
+export default function BlogPostClient({ post }: BlogPostClientProps) {
   const rootRef = useRef<HTMLDivElement>(null)
+  const articleRef = useRef<HTMLDivElement>(null)
+  const { ref: subheadingRef, inView: subheadingInView } = useInViewOnce<HTMLParagraphElement>()
+  const subheading = post.subheadingOverride ?? getFirstSentence(post.bodyHtml)
   const [bg, setBg] = useState(AUBERGINE)
   const [headShown, setHeadShown] = useState(false)
+  const [shareUrl, setShareUrl] = useState('')
+  const [linkCopied, setLinkCopied] = useState(false)
+
+  const POSTS = getBlogStripCards(5, post.slug)
+
+  // Stable reference so the dangerouslySetInnerHTML div isn't reconciled (and its
+  // manually-animated headings reset) on every unrelated re-render (e.g. shareUrl).
+  const bodyHtmlProp = useMemo(() => ({ __html: post.bodyHtml }), [post.bodyHtml])
 
   useEffect(() => {
     const t = setTimeout(() => setHeadShown(true), 200)
     return () => clearTimeout(t)
   }, [])
+
+  useEffect(() => {
+    setShareUrl(window.location.href)
+  }, [post.slug])
 
   useEffect(() => {
     let ticking = false
@@ -61,8 +75,70 @@ export default function BlogPostClient({ post, related }: BlogPostClientProps) {
     }
   }, [])
 
-  const { ref: taglineRef, inView: taglineInView } = useInViewOnce<HTMLDivElement>()
-  const { ref: ctaTextRef, inView: ctaTextInView } = useInViewOnce<HTMLDivElement>()
+  // Article body headings (raw HTML from dangerouslySetInnerHTML, so not individual
+  // React elements) type themselves out on scroll-into-view, via direct DOM manipulation.
+  useEffect(() => {
+    const container = articleRef.current
+    if (!container) return
+    const targets = Array.from(container.querySelectorAll('h2, h3')) as HTMLElement[]
+    if (targets.length === 0) return
+
+    const fullText = new Map<HTMLElement, string>()
+    targets.forEach((el) => {
+      fullText.set(el, el.textContent || '')
+      el.textContent = ''
+    })
+
+    const intervals: ReturnType<typeof setInterval>[] = []
+    // threshold stays 0 — an empty-text element still has a normal line-height box,
+    // but keeping this consistent with useInViewOnce's proven config either way.
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return
+          const el = entry.target as HTMLElement
+          observer.unobserve(el)
+          const text = fullText.get(el) || ''
+          let i = 0
+          const id = setInterval(() => {
+            i += 1
+            el.textContent = text.slice(0, i)
+            if (i >= text.length) clearInterval(id)
+          }, 18)
+          intervals.push(id)
+        })
+      },
+      { threshold: 0, rootMargin: '0px 0px -15% 0px' }
+    )
+    targets.forEach((el) => observer.observe(el))
+    return () => {
+      observer.disconnect()
+      intervals.forEach((id) => clearInterval(id))
+    }
+  }, [post.slug])
+
+  const stripRef = useRef<HTMLDivElement>(null)
+  const pausedRef = useRef(false)
+  const stripPosRef = useRef(0)
+
+  useEffect(() => {
+    let raf: number
+    function loop() {
+      const s = stripRef.current
+      if (s && !pausedRef.current) {
+        // The strip renders its card set twice back-to-back, so wrapping at the
+        // halfway point lands on an identical copy — the loop is seamless, no snap.
+        const setWidth = s.scrollWidth / 2
+        stripPosRef.current += 0.4
+        if (stripPosRef.current >= setWidth) stripPosRef.current -= setWidth
+        s.scrollLeft = stripPosRef.current
+      }
+      raf = requestAnimationFrame(loop)
+    }
+    raf = requestAnimationFrame(loop)
+    return () => cancelAnimationFrame(raf)
+  }, [])
+
   const { ref: relatedLabelRef, inView: relatedLabelInView } = useInViewOnce<HTMLParagraphElement>()
   const { ref: relatedHeadlineRef, inView: relatedHeadlineInView } = useInViewOnce<HTMLHeadingElement>()
 
@@ -83,6 +159,35 @@ export default function BlogPostClient({ post, related }: BlogPostClientProps) {
     year: 'numeric',
   })
 
+  const handleCopyLink = async () => {
+    await navigator.clipboard.writeText(shareUrl)
+    setLinkCopied(true)
+    setTimeout(() => setLinkCopied(false), 2000)
+  }
+
+  const softCtaHref = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
+    `Hi Aneri, I read "${post.title}" and wanted to talk about my brand's positioning.`
+  )}`
+
+  const shareLinks = [
+    {
+      label: 'WhatsApp',
+      href: `https://wa.me/?text=${encodeURIComponent(`${post.title} — ${shareUrl}`)}`,
+    },
+    {
+      label: 'LinkedIn',
+      href: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`,
+    },
+    {
+      label: 'X',
+      href: `https://twitter.com/intent/tweet?text=${encodeURIComponent(post.title)}&url=${encodeURIComponent(shareUrl)}`,
+    },
+    {
+      label: 'Email',
+      href: `mailto:?subject=${encodeURIComponent(post.title)}&body=${encodeURIComponent(shareUrl)}`,
+    },
+  ]
+
   return (
     <div
       ref={rootRef}
@@ -91,26 +196,42 @@ export default function BlogPostClient({ post, related }: BlogPostClientProps) {
     >
       <Nav bg={bg} recentPosts={NAV_POSTS} />
 
-      {/* SECTION 1 — HERO */}
-      <section
-        data-bg="aubergine"
-        className="flex flex-col items-center px-5 pb-[70px] pt-[150px] text-center md:px-16"
-      >
+      {/* SECTION 1 — BREADCRUMB + HERO IMAGE */}
+      <section data-bg="aubergine" className="flex flex-col items-center px-5 pt-[150px] md:px-16">
         <a
           href="/blog"
-          className="mb-5 inline-flex items-center gap-2 text-[13px] font-semibold uppercase tracking-[0.18em] text-cognac"
+          className="mb-10 inline-flex items-center gap-2 self-start text-[12px] font-medium uppercase tracking-[0.18em] text-cognac/70 transition-colors duration-300 hover:text-cognac md:self-center"
         >
           <span>←</span>
           <span>The Blog.</span>
         </a>
-        <div ref={taglineRef} style={fade(taglineInView)} className="mb-[22px]">
+        <div className="mx-auto w-full max-w-[560px]">
+          <Image
+            src={post.featuredImage}
+            alt={post.title}
+            width={post.featuredImageWidth}
+            height={post.featuredImageHeight}
+            unoptimized
+            priority
+            className="mx-auto block rounded-sw"
+            style={{ width: 'auto', height: 'auto', maxWidth: '100%', maxHeight: '65vh' }}
+          />
+        </div>
+      </section>
+
+      {/* SECTION 2 — TITLE + BYLINE */}
+      <section
+        data-bg="aubergine"
+        className="flex flex-col items-center px-5 pb-[70px] pt-[52px] text-center md:px-16"
+      >
+        <div className="mb-[22px]">
           <span className="text-[13px] font-semibold uppercase tracking-[0.18em] text-cognac">
             {post.category}
           </span>
         </div>
-        <h1 className="mx-auto max-w-[22ch] overflow-hidden pb-[0.1em]">
+        <h1 className="mx-auto max-w-full overflow-hidden pb-[0.1em] md:max-w-[820px]">
           <span
-            className="inline-block font-vollkorn text-[30px] font-medium leading-[1.3] tracking-[-0.01em] md:text-[48px]"
+            className="inline-block font-vollkorn text-[26px] font-medium leading-[1.3] tracking-[-0.01em] md:text-[48px]"
             style={{
               opacity: headShown ? 1 : 0,
               transform: headShown ? 'translateY(0)' : 'translateY(110%)',
@@ -120,16 +241,20 @@ export default function BlogPostClient({ post, related }: BlogPostClientProps) {
             {post.title}
           </span>
         </h1>
-        <p
-          style={fade(taglineInView, 150)}
-          className="mt-[26px] max-w-[56ch] text-[17px] leading-[1.6] text-cognac md:text-xl"
-        >
-          {post.subtitle}
-        </p>
-        <div
-          style={fade(taglineInView, 220)}
-          className="mt-8 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-sm text-parchment/80"
-        >
+        {subheading && (
+          <p
+            ref={subheadingRef}
+            style={fade(subheadingInView)}
+            className="mx-auto mt-6 max-w-[56ch] font-vollkorn text-lg italic leading-[1.6] text-cognac md:text-xl"
+          >
+            {subheading}
+          </p>
+        )}
+        <div className="mt-8 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-sm text-parchment/80">
+          <span>{publishedLabel}</span>
+          <span className="text-cognac">·</span>
+          <span>{post.readingTime} min read</span>
+          <span className="text-cognac">·</span>
           <span>{post.authorName}</span>
           {post.authorTitle && (
             <>
@@ -137,81 +262,88 @@ export default function BlogPostClient({ post, related }: BlogPostClientProps) {
               <span>{post.authorTitle}</span>
             </>
           )}
-          <span className="text-cognac">·</span>
-          <span>{publishedLabel}</span>
-          <span className="text-cognac">·</span>
-          <span>{post.readingTime} min read</span>
-        </div>
-      </section>
-
-      {/* SECTION 2 — FEATURED IMAGE */}
-      <section data-bg="aubergine" className="px-5 pb-[70px] md:px-16 md:pb-[130px]">
-        <div className="relative mx-auto aspect-[16/10] w-full max-w-[1200px] overflow-hidden rounded-sw bg-[repeating-linear-gradient(45deg,#1c0f24,#1c0f24_11px,#160b1d_11px,#160b1d_22px)]">
-          <Image
-            src={post.featuredImage}
-            alt={post.title}
-            fill
-            unoptimized
-            className="object-cover"
-            priority
-          />
         </div>
       </section>
 
       {/* SECTION 3 — BODY */}
-      <section data-bg="aubergine" className="px-5 pb-[90px] md:px-16 md:pb-[150px]">
+      <section data-bg="aubergine" className="px-5 pb-[60px] md:px-16">
         <div
-          className="mx-auto max-w-[720px] space-y-6 text-base leading-[1.8] text-parchment md:text-lg [&>h2]:mb-1 [&>h2]:mt-14 [&>h2]:font-vollkorn [&>h2]:text-[26px] [&>h2]:font-medium [&>h2]:leading-[1.3] [&>h3]:mb-1 [&>h3]:mt-8 [&>h3]:font-vollkorn [&>h3]:text-[21px] [&>h3]:font-medium [&>h3]:leading-[1.3] [&>ol]:list-decimal [&>ol]:space-y-2 [&>ol]:pl-6 [&_a]:text-cognac [&_a]:underline [&_a]:decoration-cognac/50 [&_a]:underline-offset-2 [&_em]:italic [&_strong]:font-semibold [&_strong]:text-parchment md:[&>h2]:text-[32px] md:[&>h3]:text-[24px]"
-          dangerouslySetInnerHTML={{ __html: post.bodyHtml }}
+          ref={articleRef}
+          className="mx-auto max-w-[720px] space-y-6 text-base leading-[1.8] text-parchment md:text-lg [&>h2]:my-10 [&>h2]:font-vollkorn [&>h2]:text-[26px] [&>h2]:font-medium [&>h2]:leading-[1.3] [&>h3]:my-10 [&>h3]:font-vollkorn [&>h3]:text-[21px] [&>h3]:font-medium [&>h3]:leading-[1.3] [&>ol]:list-decimal [&>ol]:space-y-2 [&>ol]:pl-6 [&_a]:text-cognac [&_a]:underline [&_a]:decoration-cognac/50 [&_a]:underline-offset-2 [&_em]:italic [&_strong]:font-semibold [&_strong]:text-parchment md:[&>h2]:text-[32px] md:[&>h3]:text-[24px]"
+          dangerouslySetInnerHTML={bodyHtmlProp}
         />
       </section>
 
-      {/* SECTION 4 — CTA */}
-      <section data-bg="bordeaux" className="px-5 py-16 md:px-16 md:py-[140px]">
-        <div className="mx-auto flex max-w-[1200px] flex-col items-center gap-9">
-          <div ref={ctaTextRef} style={fade(ctaTextInView)}>
-            <p className="max-w-[40ch] cursor-default text-center text-base leading-[1.6] text-parchment transition-[transform,color] duration-[400ms] ease-sw hover:scale-[1.03] hover:text-cognac md:text-xl">
-              Discerning businesses never work alone.
-            </p>
+      {/* SECTION 4 — SHARE + SOFT CTA */}
+      <section data-bg="aubergine" className="px-5 pb-[90px] md:px-16 md:pb-[150px]">
+        <div className="mx-auto max-w-[720px] border-t border-cognac/30 pt-8">
+          <div className="flex flex-wrap items-center gap-3.5">
+            <span className="text-[13px] font-semibold uppercase tracking-[0.18em] text-cognac">
+              Share this piece
+            </span>
+            {shareLinks.map((s) => (
+              <a
+                key={s.label}
+                href={s.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rounded-full border border-cognac/60 px-4 py-1.5 font-satoshi text-[13px] text-parchment transition-colors duration-300 hover:bg-[rgba(156,107,53,0.14)]"
+              >
+                {s.label}
+              </a>
+            ))}
+            <button
+              type="button"
+              onClick={handleCopyLink}
+              className="rounded-full border border-cognac/60 px-4 py-1.5 font-satoshi text-[13px] text-parchment transition-colors duration-300 hover:bg-[rgba(156,107,53,0.14)]"
+            >
+              {linkCopied ? 'Link copied.' : 'Copy Link'}
+            </button>
           </div>
-          <CTAButtons />
+
+          <a
+            href={softCtaHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-10 inline-flex items-center gap-2 font-vollkorn text-lg italic text-parchment transition-colors duration-300 hover:text-cognac md:text-xl"
+          >
+            If your brand&rsquo;s positioning needs this kind of scrutiny, let&rsquo;s talk
+            <span aria-hidden="true" className="text-cognac">→</span>
+          </a>
         </div>
       </section>
 
       {/* SECTION 5 — RECENT POSTS */}
-      {related.length > 0 && (
-        <section data-bg="bordeaux" className="px-5 py-16 text-center md:px-16 md:py-[130px]">
-          <div className="mx-auto max-w-[1200px]">
-            <p
-              ref={relatedLabelRef}
-              style={fade(relatedLabelInView)}
-              className="mb-4 text-[13px] font-semibold uppercase tracking-[0.18em] text-cognac"
-            >
-              The Blog.
-            </p>
-            <h2
-              ref={relatedHeadlineRef}
-              style={{ ...wipe(relatedHeadlineInView), fontFamily: 'var(--font-vollkorn)' }}
-              className="mb-[60px] inline-block text-[32px] font-medium leading-[1.4] md:text-[52px]"
-            >
-              Recent Posts.
-            </h2>
-            <div className="grid grid-cols-1 justify-items-center gap-x-8 gap-y-14 sm:grid-cols-2 md:grid-cols-3">
-              {related.map((p) => (
-                <BlogCard
-                  key={p.slug}
-                  title={p.title}
-                  author={p.authorName}
-                  read={`${p.readingTime} min`}
-                  offset="0px"
-                  href={`/blog/${p.slug}`}
-                  image={p.featuredImage}
-                />
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
+      <section data-bg="bordeaux" className="py-16 text-center md:py-[130px]">
+        <div className="mx-auto max-w-[1200px] px-5 md:px-16">
+          <p
+            ref={relatedLabelRef}
+            style={fade(relatedLabelInView)}
+            className="mb-4 text-[13px] font-semibold uppercase tracking-[0.18em] text-cognac"
+          >
+            The Blog.
+          </p>
+          <h2
+            ref={relatedHeadlineRef}
+            style={{ ...wipe(relatedHeadlineInView), fontFamily: 'var(--font-vollkorn)' }}
+            className="mb-[60px] inline-block text-[32px] font-medium leading-[1.4] md:text-[52px]"
+          >
+            Recent Posts.
+          </h2>
+        </div>
+
+        <div
+          ref={stripRef}
+          data-hstrip
+          onMouseEnter={() => (pausedRef.current = true)}
+          onMouseLeave={() => (pausedRef.current = false)}
+          className="flex gap-7 overflow-x-auto px-5 pb-2 md:px-16"
+        >
+          {[...POSTS, ...POSTS].map((p, i) => (
+            <BlogCard key={`${p.href}-${i}`} {...p} />
+          ))}
+        </div>
+      </section>
 
       <Footer />
     </div>
