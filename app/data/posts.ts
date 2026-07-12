@@ -49,8 +49,8 @@ export const POSTS: BlogPost[] = [
     authorTitle: 'Founder, Sleek Wealth',
     category: 'Market Intelligence',
     featuredImage: '/blog/the-great-luxury-collapse-of-2026-and-who-survived-it-unfettered/featured.png',
-    featuredImageWidth: 6250,
-    featuredImageHeight: 4830,
+    featuredImageWidth: 1672,
+    featuredImageHeight: 941,
     publishedAt: '2026-06-24',
     readingTime: 3,
     status: 'published',
@@ -78,7 +78,8 @@ export const POSTS: BlogPost[] = [
 <p>The brands that are thriving are the ones that never moved.</p>
 <h2>What The Luxury Spectrum&trade; Shows</h2>
 <figure style="margin:2.5rem 0;display:flex;flex-direction:column;gap:0.75rem;">
-<img src="/blog/the-great-luxury-collapse-of-2026-and-who-survived-it-unfettered/gallery-1.png" alt="A dark leather box displayed on a stone pedestal under a single spotlight in a dimly lit room" width="1672" height="941" loading="lazy" style="width:100%;height:auto;border-radius:10px;display:block;" />
+<img src="/blog/the-great-luxury-collapse-of-2026-and-who-survived-it-unfettered/gallery-1.png" alt="The Luxury Spectrum diagram, showing five brand positioning levels from Bespoke to Accessible" width="6250" height="4830" loading="lazy" style="width:100%;height:auto;border-radius:10px;display:block;" />
+<figcaption style="font-family:var(--font-satoshi);font-size:13px;color:rgba(237,232,220,0.6);text-align:center;">The Luxury Spectrum&trade;</figcaption>
 </figure>
 <p>This is not a coincidence. This is The Luxury Spectrum&trade; in real time.</p>
 <p>Gucci was a Coveted brand that slowly behaved like an Established one, and then like an Aspirational one. Each step downward felt like growth. More consumers. More revenue. More reach.</p>
