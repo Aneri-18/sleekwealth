@@ -151,8 +151,7 @@ export default function BlogPostClient({ post, related }: BlogPostClientProps) {
             src={post.featuredImage}
             alt={post.title}
             fill
-            sizes="(max-width: 900px) 100vw, 1200px"
-            quality={95}
+            unoptimized
             className="object-cover"
             priority
           />

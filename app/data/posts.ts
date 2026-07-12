@@ -338,12 +338,12 @@ export interface BlogStripCard {
 
 const STRIP_OFFSETS = ['0px', '48px', '16px', '56px']
 
-// A horizontal auto-scroll strip needs its content wider than the viewport to have
-// anything to scroll through — pad with "see more" filler cards (no fabricated posts)
-// until there's enough real+filler width. Fillers disappear on their own once enough
-// real posts exist.
-export function getBlogStripCards(minCount = 5): BlogStripCard[] {
-  const cards: BlogStripCard[] = getAllPosts().map((p, i) => ({
+// The strip always shows exactly `count` newest posts — it's a teaser, not the archive
+// (that's /blog), so it neither shrinks awkwardly nor grows unbounded as posts publish.
+// Pad with "see more" filler cards (no fabricated posts) until there's enough real+filler
+// width to scroll; fillers disappear on their own once enough real posts exist.
+export function getBlogStripCards(count = 7): BlogStripCard[] {
+  const cards: BlogStripCard[] = getAllPosts().slice(0, count).map((p, i) => ({
     title: p.title,
     author: p.authorName,
     read: `${p.readingTime} min`,
@@ -351,13 +351,14 @@ export function getBlogStripCards(minCount = 5): BlogStripCard[] {
     href: `/blog/${p.slug}`,
     image: p.featuredImage,
   }))
-  while (cards.length < minCount) {
+  let fillerN = 0
+  while (cards.length < count) {
     cards.push({
       title: 'More from the Blog.',
       author: 'Sleek Wealth',
       read: '',
       offset: STRIP_OFFSETS[cards.length % STRIP_OFFSETS.length],
-      href: '/blog',
+      href: `/blog#more-${fillerN++}`,
     })
   }
   return cards

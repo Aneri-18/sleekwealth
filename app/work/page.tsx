@@ -76,9 +76,11 @@ export default function Work() {
     function loop() {
       const s = stripRef.current
       if (s && !pausedRef.current) {
-        const max = s.scrollWidth - s.clientWidth
+        // The strip renders its card set twice back-to-back, so wrapping at the
+        // halfway point lands on an identical copy — the loop is seamless, no snap.
+        const setWidth = s.scrollWidth / 2
         stripPosRef.current += 0.4
-        if (stripPosRef.current >= max) stripPosRef.current = 0
+        if (stripPosRef.current >= setWidth) stripPosRef.current -= setWidth
         s.scrollLeft = stripPosRef.current
       }
       raf = requestAnimationFrame(loop)
@@ -192,8 +194,8 @@ export default function Work() {
           onMouseLeave={() => (pausedRef.current = false)}
           className="flex gap-7 overflow-x-auto pb-10 pt-5"
         >
-          {POSTS.map((post) => (
-            <BlogCard key={post.href} {...post} />
+          {[...POSTS, ...POSTS].map((post, i) => (
+            <BlogCard key={`${post.href}-${i}`} {...post} />
           ))}
         </div>
       </section>

@@ -145,23 +145,23 @@ export default function Nav({ bg, recentPosts }: NavProps) {
             )}
           </div>
 
-          <div className="flex flex-1 basis-[320px] flex-col gap-[22px]" style={{ maxWidth: 460 }}>
+          <div className="flex flex-1 basis-[400px] flex-col gap-[27.5px]" style={{ maxWidth: 575 }}>
             {recentPosts.map((post) => (
-              <a key={post.title} href={post.href} className="flex items-center gap-[18px]">
-                <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-sw bg-[repeating-linear-gradient(45deg,#1d1023,#1d1023_8px,#170c1d_8px,#170c1d_16px)]">
+              <a key={post.title} href={post.href} className="flex items-center gap-[22.5px]">
+                <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-sw bg-[repeating-linear-gradient(45deg,#1d1023,#1d1023_8px,#170c1d_8px,#170c1d_16px)]">
                   {post.image && (
-                    <Image src={post.image} alt="" fill sizes="64px" quality={90} className="object-cover" />
+                    <Image src={post.image} alt="" fill unoptimized className="object-cover" />
                   )}
                 </div>
-                <div className="flex flex-1 flex-col gap-[5px]">
-                  <span className="font-satoshi text-[11px] uppercase tracking-[0.18em] text-cognac">
+                <div className="flex flex-1 flex-col gap-[6.25px]">
+                  <span className="font-satoshi text-[13.75px] uppercase tracking-[0.18em] text-cognac">
                     Blog
                   </span>
-                  <span className="font-satoshi text-[15px] leading-[1.35] text-parchment">
+                  <span className="font-satoshi text-[18.75px] leading-[1.35] text-parchment">
                     {post.title}
                   </span>
                 </div>
-                <span className="font-satoshi text-lg text-cognac">→</span>
+                <span className="font-satoshi text-[22.5px] text-cognac">→</span>
               </a>
             ))}
           </div>
