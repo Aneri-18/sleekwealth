@@ -15,16 +15,16 @@ export const PROGRAMS: Program[] = [
   {
     slug: 'positioning-clarity',
     name: 'Positioning Clarity',
-    line: "Your brand is saying something. The question is whether it's saying what you intend.",
+    line: 'Your brand is saying something. The question is whether it’s saying what you intend.',
     detail: {
       achievements: ['Market Clarity', 'Category Distinction', 'Brand Coherence'],
       paragraph:
-        'If your brand cannot say, in one sentence, what it is and who it is for, the market will decide for you. Positioning Clarity is where we do that work — stripping the brand back to what it actually signals, then rebuilding the sentence that should be driving every decision after it. It is not a rebrand. It is not a workshop with no output. It is a single, defensible answer to the only question that matters: what does this brand deserve to charge, and why.',
+        'If your brand cannot say, in one sentence, what it is and who it is for, the market will decide for you. Positioning Clarity is where that sentence gets built — stripping the brand back to what it actually signals, then rebuilding the line that should be driving every decision after it. The output is singular and defensible: one sentence, precise enough to hold every future call to it.',
       features: [
         { name: 'Clarity', line: 'One sentence the whole business can build from.' },
         { name: 'Signal Audit', line: 'Every touchpoint reviewed for what it actually says.' },
         { name: 'Language', line: 'The words that carry the positioning into the market.' },
-        { name: 'Implementation Path', line: 'What changes first, what waits, what stays.' },
+        { name: 'Implementation Path', line: 'What changes first. What waits. What stays.' },
       ],
     },
   },
