@@ -161,24 +161,27 @@ export default function ProgramPageClient({ program, detail }: ProgramPageClient
       </section>
 
       {/* SECTION 2 — HERO IMAGE */}
-      <section data-bg="aubergine" className="px-5 pb-[70px] md:px-16 md:pb-[130px]">
-        <div
-          className="relative mx-auto flex w-full max-w-[840px] items-center justify-center overflow-hidden rounded-sw bg-[repeating-linear-gradient(45deg,#1c0f24,#1c0f24_11px,#160b1d_11px,#160b1d_22px)]"
-          style={{
-            aspectRatio:
-              program.imageWidth && program.imageHeight
-                ? `${program.imageWidth} / ${program.imageHeight}`
-                : '16 / 10',
-          }}
-        >
-          {program.image ? (
-            <Image src={program.image} alt="" fill unoptimized className="object-cover" />
-          ) : (
+      <section data-bg="aubergine" className="flex flex-col items-center px-5 pb-[70px] md:px-16 md:pb-[130px]">
+        {program.image ? (
+          <div className="mx-auto w-full max-w-[560px]">
+            <Image
+              src={program.image}
+              alt={program.name}
+              width={program.imageWidth ?? 1280}
+              height={program.imageHeight ?? 960}
+              unoptimized
+              priority
+              className="mx-auto block rounded-sw"
+              style={{ width: 'auto', height: 'auto', maxWidth: '100%', maxHeight: '65vh' }}
+            />
+          </div>
+        ) : (
+          <div className="relative mx-auto flex aspect-[16/10] w-full max-w-[560px] items-center justify-center overflow-hidden rounded-sw bg-[repeating-linear-gradient(45deg,#1c0f24,#1c0f24_11px,#160b1d_11px,#160b1d_22px)]">
             <span className="font-satoshi text-xs uppercase tracking-[0.14em] text-cognac">
               Editorial still — program image
             </span>
-          )}
-        </div>
+          </div>
+        )}
       </section>
 
       {/* SECTION 3 — SIDEBAR + DARKENING PARAGRAPH */}
