@@ -8,6 +8,9 @@ export interface Program {
   slug: string
   name: string
   line: string
+  image?: string
+  imageWidth?: number
+  imageHeight?: number
   detail?: ProgramDetail
 }
 
@@ -16,6 +19,9 @@ export const PROGRAMS: Program[] = [
     slug: 'positioning-clarity',
     name: 'Positioning Clarity',
     line: 'Your brand is saying something. The question is whether it’s saying what you intend.',
+    image: '/work/positioning-clarity/featured.jpg',
+    imageWidth: 1280,
+    imageHeight: 960,
     detail: {
       achievements: ['Market Clarity', 'Category Distinction', 'Brand Coherence'],
       paragraph:
@@ -32,6 +38,9 @@ export const PROGRAMS: Program[] = [
     slug: 'pricing-architecture',
     name: 'Pricing Architecture',
     line: 'Price is not a number. It is a signal.',
+    image: '/work/pricing-architecture/featured.jpg',
+    imageWidth: 1280,
+    imageHeight: 960,
     detail: {
       achievements: ['Price Integrity', 'Signal Discipline', 'Margin Architecture'],
       paragraph:
@@ -48,6 +57,9 @@ export const PROGRAMS: Program[] = [
     slug: 'launch-positioning',
     name: 'Launch Positioning',
     line: 'The most expensive mistake in luxury is launching before the signal is clear.',
+    image: '/work/launch-positioning/featured.jpg',
+    imageWidth: 1280,
+    imageHeight: 960,
     detail: {
       achievements: ['Launch Readiness', 'Signal Sequencing', 'Category Entry'],
       paragraph:
@@ -64,6 +76,9 @@ export const PROGRAMS: Program[] = [
     slug: 'brand-dilution-audit',
     name: 'Brand Dilution Audit',
     line: 'A discount. A collaboration. A second line. Each decision felt reasonable at the time.',
+    image: '/work/brand-dilution-audit/featured.jpg',
+    imageWidth: 1280,
+    imageHeight: 960,
     detail: {
       achievements: ['Dilution Diagnosis', 'Signal Recovery', 'Decision Discipline'],
       paragraph:
@@ -80,6 +95,9 @@ export const PROGRAMS: Program[] = [
     slug: 'spatial-experience',
     name: 'Spatial Experience',
     line: 'The room is never just a room.',
+    image: '/work/spatial-experience/featured.jpg',
+    imageWidth: 1280,
+    imageHeight: 960,
     detail: {
       achievements: ['Spatial Signal', 'Sensory Coherence', 'Material Language'],
       paragraph:
@@ -96,6 +114,9 @@ export const PROGRAMS: Program[] = [
     slug: 'founder-positioning',
     name: 'Founder Positioning',
     line: 'You are visible. The question is whether your visibility is making the brand or marring it.',
+    image: '/work/founder-positioning/featured.jpg',
+    imageWidth: 854,
+    imageHeight: 1280,
     detail: {
       achievements: ['Founder Signal', 'Narrative Control', 'Visibility Discipline'],
       paragraph:
@@ -112,6 +133,9 @@ export const PROGRAMS: Program[] = [
     slug: 'legacy-brand-modernisation',
     name: 'Legacy Brand Modernisation',
     line: 'Heritage is an asset. Until it becomes a constraint.',
+    image: '/work/legacy-brand-modernisation/featured.jpg',
+    imageWidth: 1280,
+    imageHeight: 960,
     detail: {
       achievements: ['Heritage Leverage', 'Modern Signal', 'Continuity Design'],
       paragraph:
@@ -128,6 +152,9 @@ export const PROGRAMS: Program[] = [
     slug: 'tactile-brand-experience',
     name: 'Tactile Brand Experience',
     line: 'The hand knows before the mind decides.',
+    image: '/work/tactile-brand-experience/featured.jpg',
+    imageWidth: 1280,
+    imageHeight: 960,
     detail: {
       achievements: ['Material Signal', 'Sensory Trust', 'Tactile Coherence'],
       paragraph:

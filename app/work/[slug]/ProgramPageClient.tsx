@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import { useEffect, useRef, useState } from 'react'
 import Nav from '../../components/Nav'
 import Footer from '../../components/Footer'
@@ -32,6 +33,7 @@ export default function ProgramPageClient({ program, detail }: ProgramPageClient
   ].map((p) => ({
     name: p.name,
     href: p.detail ? `/work/${p.slug}` : '#',
+    image: p.image,
   }))
 
   const rootRef = useRef<HTMLDivElement>(null)
@@ -160,10 +162,22 @@ export default function ProgramPageClient({ program, detail }: ProgramPageClient
 
       {/* SECTION 2 — HERO IMAGE */}
       <section data-bg="aubergine" className="px-5 pb-[70px] md:px-16 md:pb-[130px]">
-        <div className="mx-auto flex aspect-[16/10] w-full max-w-[1200px] items-center justify-center overflow-hidden rounded-sw bg-[repeating-linear-gradient(45deg,#1c0f24,#1c0f24_11px,#160b1d_11px,#160b1d_22px)]">
-          <span className="font-satoshi text-xs uppercase tracking-[0.14em] text-cognac">
-            Editorial still — program image
-          </span>
+        <div
+          className="relative mx-auto flex w-full max-w-[840px] items-center justify-center overflow-hidden rounded-sw bg-[repeating-linear-gradient(45deg,#1c0f24,#1c0f24_11px,#160b1d_11px,#160b1d_22px)]"
+          style={{
+            aspectRatio:
+              program.imageWidth && program.imageHeight
+                ? `${program.imageWidth} / ${program.imageHeight}`
+                : '16 / 10',
+          }}
+        >
+          {program.image ? (
+            <Image src={program.image} alt="" fill unoptimized className="object-cover" />
+          ) : (
+            <span className="font-satoshi text-xs uppercase tracking-[0.14em] text-cognac">
+              Editorial still — program image
+            </span>
+          )}
         </div>
       </section>
 

@@ -261,7 +261,7 @@ export default function Home() {
 
           <div ref={workLinkRef} style={fade(workLinkInView)} className="mt-9">
             <a
-              href="#"
+              href="/work"
               className="[background-image:linear-gradient(#9C6B35,#9C6B35)] [background-position:0_100%] [background-size:0%_1px] bg-no-repeat text-sm font-semibold tracking-[0.06em] text-cognac transition-[background-size] duration-200 ease-out hover:[background-size:100%_1px]"
             >
               All eight →
