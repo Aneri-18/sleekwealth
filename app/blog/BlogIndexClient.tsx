@@ -110,12 +110,12 @@ export default function BlogIndexClient() {
 
       {/* SECTION 2 — CATEGORY FILTER */}
       <section data-bg="aubergine" className="px-5 pb-8 md:px-16">
-        <div className="mx-auto flex max-w-[1300px] flex-wrap justify-center gap-3">
+        <div className="mx-auto flex max-w-[1300px] flex-wrap justify-center gap-2">
           <button
             type="button"
             onClick={() => setActiveCategory(null)}
             aria-pressed={activeCategory === null}
-            className={`rounded-full border px-4 py-1.5 font-satoshi text-[13px] tracking-[0.02em] transition-colors duration-300 ${
+            className={`rounded-full border px-[11px] py-1 font-satoshi text-[9px] tracking-[0.02em] transition-colors duration-300 ${
               activeCategory === null
                 ? 'border-cognac bg-[rgba(156,107,53,0.18)] text-parchment'
                 : 'border-cognac/50 text-parchment/80 hover:bg-[rgba(156,107,53,0.14)]'
@@ -130,7 +130,7 @@ export default function BlogIndexClient() {
               data-category={categorySlug(cat)}
               onClick={() => setActiveCategory((prev) => (prev === cat ? null : cat))}
               aria-pressed={activeCategory === cat}
-              className={`rounded-full border px-4 py-1.5 font-satoshi text-[13px] tracking-[0.02em] transition-colors duration-300 ${
+              className={`rounded-full border px-[11px] py-1 font-satoshi text-[9px] tracking-[0.02em] transition-colors duration-300 ${
                 activeCategory === cat
                   ? 'border-cognac bg-[rgba(156,107,53,0.18)] text-parchment'
                   : 'border-cognac/50 text-parchment/80 hover:bg-[rgba(156,107,53,0.14)]'
