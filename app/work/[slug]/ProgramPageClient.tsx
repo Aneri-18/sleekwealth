@@ -24,8 +24,12 @@ interface ProgramPageClientProps {
 }
 
 export default function ProgramPageClient({ program, detail }: ProgramPageClientProps) {
-  const index = PROGRAMS.findIndex((p) => p.slug === program.slug) + 1
-  const otherPrograms = PROGRAMS.filter((p) => p.slug !== program.slug).map((p) => ({
+  const currentIndex = PROGRAMS.findIndex((p) => p.slug === program.slug)
+  const index = currentIndex + 1
+  const otherPrograms = [
+    ...PROGRAMS.slice(currentIndex + 1),
+    ...PROGRAMS.slice(0, currentIndex),
+  ].map((p) => ({
     name: p.name,
     href: p.detail ? `/work/${p.slug}` : '#',
   }))
