@@ -20,7 +20,7 @@ export default function BlogCard({
   return (
     <a
       href={href}
-      style={{ marginTop: offset, width: 'clamp(240px, 24vw, 300px)' }}
+      style={{ marginTop: offset, width: 'clamp(168px, 24vw, 300px)' }}
       className="group flex shrink-0 flex-col transition-transform duration-[400ms] ease-out hover:scale-[1.02]"
     >
       <div className="relative flex aspect-[3/4] w-full items-center justify-center overflow-hidden rounded-sw bg-[repeating-linear-gradient(45deg,#3a0b14,#3a0b14_11px,#320a12_11px,#320a12_22px)]">

@@ -92,7 +92,7 @@ export default function BlogIndexClient() {
           The Blog.
         </p>
         <h1
-          className="max-w-[22ch] overflow-hidden pb-[0.1em] text-[40px] font-medium leading-[1.35] tracking-[-0.01em] md:text-[72px]"
+          className="max-w-[22ch] overflow-hidden pb-[0.1em] text-[32px] font-medium leading-[1.35] tracking-[-0.01em] md:text-[72px]"
           style={{ fontFamily: 'var(--font-vollkorn)' }}
         >
           <span

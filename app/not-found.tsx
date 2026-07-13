@@ -35,7 +35,7 @@ export default function NotFound() {
         >
           <span className="text-xs font-semibold uppercase tracking-[0.18em] text-cognac">Error 404</span>
           <div className="h-px w-[60px] bg-cognac" />
-          <h1 className="font-vollkorn text-[30px] font-medium leading-[1.4] md:text-[44px]">
+          <h1 className="font-vollkorn text-[26px] font-medium leading-[1.4] md:text-[44px]">
             This is not where the brand lives.
           </h1>
           <a

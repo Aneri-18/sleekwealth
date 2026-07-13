@@ -104,7 +104,7 @@ export default function AboutPageClient() {
       >
         <p className="mb-[22px] text-[13px] font-semibold uppercase tracking-[0.18em] text-cognac">About.</p>
         <h1
-          className="max-w-[18ch] overflow-hidden pb-[0.1em] text-[40px] font-medium leading-[1.35] tracking-[-0.01em] md:text-[72px]"
+          className="max-w-[18ch] overflow-hidden pb-[0.1em] text-[32px] font-medium leading-[1.35] tracking-[-0.01em] md:text-[72px]"
           style={{ fontFamily: 'var(--font-vollkorn)' }}
         >
           <span
@@ -201,7 +201,7 @@ export default function AboutPageClient() {
           <h2
             ref={blogHeadlineRef}
             style={{ ...wipe(blogHeadlineInView), fontFamily: 'var(--font-vollkorn)' }}
-            className="mb-10 inline-block max-w-[18ch] text-[36px] font-medium leading-[1.4] md:mb-16 md:text-[64px]"
+            className="mb-10 inline-block max-w-[18ch] text-[28px] font-medium leading-[1.4] md:mb-16 md:text-[64px]"
           >
             Delve into the world of Luxury, one blog at a time.
           </h2>

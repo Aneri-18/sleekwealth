@@ -135,7 +135,7 @@ export default function Home() {
         data-bg="aubergine"
         className="flex min-h-screen flex-col items-center justify-center px-5 pb-14 pt-[104px] text-center sm:pt-[120px] md:px-16"
       >
-        <h1 className="mt-14 mb-[52px] overflow-hidden text-[44px] font-medium leading-[1.4] tracking-[-0.01em] sm:mt-[56px] sm:mb-[52px] md:mt-[120px] md:mb-24 md:text-[96px]" style={{ fontFamily: 'var(--font-vollkorn)' }}>
+        <h1 className="mt-14 mb-[52px] overflow-hidden text-[36px] font-medium leading-[1.4] tracking-[-0.01em] sm:mt-[56px] sm:mb-[52px] md:mt-[120px] md:mb-24 md:text-[96px]" style={{ fontFamily: 'var(--font-vollkorn)' }}>
           <span
             className="inline-block"
             style={{
@@ -223,7 +223,7 @@ export default function Home() {
           <h2
             ref={workHeadlineRef}
             style={{ ...wipe(workHeadlineInView), fontFamily: 'var(--font-vollkorn)' }}
-            className="mb-10 inline-block max-w-[16ch] text-[36px] font-medium leading-[1.4] md:mb-[72px] md:text-[64px]"
+            className="mb-10 inline-block max-w-[16ch] text-[28px] font-medium leading-[1.4] md:mb-[72px] md:text-[64px]"
           >
             Eight ways we help brands become inevitable.
           </h2>
@@ -258,7 +258,7 @@ export default function Home() {
             <h2
               ref={howHeadlineRef}
               style={{ ...wipe(howHeadlineInView), fontFamily: 'var(--font-vollkorn)' }}
-              className="inline-block text-[36px] font-medium leading-[1.4] md:text-[64px]"
+              className="inline-block text-[28px] font-medium leading-[1.4] md:text-[64px]"
             >
               How It Works.
             </h2>
@@ -287,7 +287,7 @@ export default function Home() {
           <h2
             ref={blogHeadlineRef}
             style={{ ...wipe(blogHeadlineInView), fontFamily: 'var(--font-vollkorn)' }}
-            className="mb-10 inline-block max-w-[18ch] text-[36px] font-medium leading-[1.4] md:mb-16 md:text-[64px]"
+            className="mb-10 inline-block max-w-[18ch] text-[28px] font-medium leading-[1.4] md:mb-16 md:text-[64px]"
           >
             Delve into the world of Luxury, one blog at a time.
           </h2>

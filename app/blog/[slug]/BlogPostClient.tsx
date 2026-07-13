@@ -213,7 +213,7 @@ export default function BlogPostClient({ post }: BlogPostClientProps) {
         </div>
         <h1 className="mx-auto max-w-full overflow-hidden pb-[0.1em] md:max-w-[820px]">
           <span
-            className="inline-block font-vollkorn text-[26px] font-medium leading-[1.3] tracking-[-0.01em] md:text-[48px]"
+            className="inline-block font-vollkorn text-[22px] font-medium leading-[1.3] tracking-[-0.01em] md:text-[48px]"
             style={{
               opacity: headShown ? 1 : 0,
               transform: headShown ? 'translateY(0)' : 'translateY(110%)',
@@ -336,7 +336,7 @@ export default function BlogPostClient({ post }: BlogPostClientProps) {
           <h2
             ref={relatedHeadlineRef}
             style={{ ...wipe(relatedHeadlineInView), fontFamily: 'var(--font-vollkorn)' }}
-            className="mb-[60px] inline-block text-[32px] font-medium leading-[1.4] md:text-[52px]"
+            className="mb-[60px] inline-block text-[26px] font-medium leading-[1.4] md:text-[52px]"
           >
             Recent Posts.
           </h2>

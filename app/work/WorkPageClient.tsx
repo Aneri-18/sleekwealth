@@ -102,7 +102,7 @@ export default function WorkPageClient() {
           <p className="mb-6 text-[13px] font-semibold uppercase tracking-[0.18em] text-cognac">
             The Work.
           </p>
-          <h1 className="max-w-[24ch] overflow-hidden pb-[0.1em] text-[28px] font-medium leading-[1.35] tracking-[-0.01em] md:text-[46px]" style={{ fontFamily: 'var(--font-vollkorn)' }}>
+          <h1 className="max-w-[24ch] overflow-hidden pb-[0.1em] text-[24px] font-medium leading-[1.35] tracking-[-0.01em] md:text-[46px]" style={{ fontFamily: 'var(--font-vollkorn)' }}>
             <span
               className="inline-block"
               style={{
@@ -162,7 +162,7 @@ export default function WorkPageClient() {
           <h2
             ref={blogHeadlineRef}
             style={{ ...wipe(blogHeadlineInView), fontFamily: 'var(--font-vollkorn)' }}
-            className="mb-10 inline-block max-w-[18ch] text-[36px] font-medium leading-[1.4] md:mb-16 md:text-[64px]"
+            className="mb-10 inline-block max-w-[18ch] text-[28px] font-medium leading-[1.4] md:mb-16 md:text-[64px]"
           >
             Delve into the world of Luxury, one blog at a time.
           </h2>

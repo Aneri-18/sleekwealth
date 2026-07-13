@@ -123,7 +123,7 @@ export default function ProgramPageClient({ program, detail }: ProgramPageClient
         </div>
         <h1 className="overflow-hidden pb-[0.1em]">
           <span
-            className="inline-block font-vollkorn text-[44px] font-medium leading-[1.3] tracking-[-0.01em] md:text-[88px]"
+            className="inline-block font-vollkorn text-[36px] font-medium leading-[1.3] tracking-[-0.01em] md:text-[88px]"
             style={{
               opacity: headShown ? 1 : 0,
               transform: headShown ? 'translateY(0)' : 'translateY(110%)',
@@ -212,7 +212,7 @@ export default function ProgramPageClient({ program, detail }: ProgramPageClient
           <h2
             ref={exploreHeadlineRef}
             style={{ ...wipe(exploreHeadlineInView), fontFamily: 'var(--font-vollkorn)' }}
-            className="mb-[60px] inline-block text-[32px] font-medium leading-[1.4] md:text-[52px]"
+            className="mb-[60px] inline-block text-[26px] font-medium leading-[1.4] md:text-[52px]"
           >
             Explore More Workings.
           </h2>
@@ -233,7 +233,7 @@ export default function ProgramPageClient({ program, detail }: ProgramPageClient
           <h2
             ref={blogHeadlineRef}
             style={{ ...wipe(blogHeadlineInView), fontFamily: 'var(--font-vollkorn)' }}
-            className="mb-10 inline-block max-w-[18ch] text-[36px] font-medium leading-[1.4] md:mb-16 md:text-[64px]"
+            className="mb-10 inline-block max-w-[18ch] text-[28px] font-medium leading-[1.4] md:mb-16 md:text-[64px]"
           >
             Delve into the world of Luxury, one blog at a time.
           </h2>
