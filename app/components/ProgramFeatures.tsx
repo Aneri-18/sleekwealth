@@ -29,6 +29,7 @@ export default function ProgramFeatures({ features }: ProgramFeaturesProps) {
           <div
             key={f.name}
             onMouseEnter={() => setActiveIndex(i)}
+            onClick={() => setActiveIndex(i)}
             className="cursor-default rounded-sw border border-cognac px-[22px] py-[26px] transition-[transform,border-color,background-color] duration-[400ms] ease-sw hover:-translate-y-0.5 hover:scale-[1.02] hover:border-[#c98a4a] hover:bg-[rgba(156,107,53,0.06)] md:px-8 md:py-[30px]"
           >
             <div className="mb-2 font-vollkorn text-[22px] font-medium leading-[1.3] md:text-[30px]">

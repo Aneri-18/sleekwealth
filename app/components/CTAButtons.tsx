@@ -25,19 +25,19 @@ export default function CTAButtons({ className = '' }: CTAButtonsProps) {
   )}`
 
   return (
-    <div className={`flex w-full max-w-[440px] flex-wrap justify-center gap-3.5 ${className}`}>
+    <div className={`flex w-full flex-nowrap justify-start gap-2.5 ${className}`}>
       <a
         href={whatsappHref}
         target="_blank"
         rel="noopener noreferrer"
-        className="flex-1 basis-[170px] rounded-[16px] border border-cognac px-[22px] py-4 text-center font-satoshi text-[15px] tracking-[0.04em] text-parchment transition-colors duration-300 hover:bg-[rgba(156,107,53,0.14)]"
+        className="rounded-[22px] border border-cognac px-4 py-2 text-center font-satoshi text-[13px] tracking-[0.04em] text-parchment transition-colors duration-300 hover:bg-[rgba(156,107,53,0.14)]"
       >
         WhatsApp
       </a>
       <button
         type="button"
         onClick={handleCopyEmail}
-        className="flex-1 basis-[170px] rounded-[16px] border border-cognac px-[22px] py-4 text-center font-satoshi text-[15px] tracking-[0.04em] text-parchment transition-colors duration-300 hover:bg-[rgba(156,107,53,0.14)]"
+        className="rounded-[22px] border border-cognac px-4 py-2 text-center font-satoshi text-[13px] tracking-[0.04em] text-parchment transition-colors duration-300 hover:bg-[rgba(156,107,53,0.14)]"
       >
         {copied ? 'Email copied.' : 'Email'}
       </button>

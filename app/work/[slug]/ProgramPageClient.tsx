@@ -80,6 +80,7 @@ export default function ProgramPageClient({ program, detail }: ProgramPageClient
 
   const strip = useAutoScrollStrip<HTMLDivElement>()
 
+  const { ref: heroImageRef, inView: heroImageInView } = useInViewOnce<HTMLDivElement>()
   const { ref: taglineRef, inView: taglineInView } = useInViewOnce<HTMLParagraphElement>()
   const { ref: ctaTextRef, inView: ctaTextInView } = useInViewOnce<HTMLDivElement>()
   const { ref: blogLabelRef, inView: blogLabelInView } = useInViewOnce<HTMLParagraphElement>()
@@ -144,7 +145,11 @@ export default function ProgramPageClient({ program, detail }: ProgramPageClient
       {/* SECTION 2 — HERO IMAGE */}
       <section data-bg="aubergine" className="flex flex-col items-center px-5 pb-[70px] md:px-16 md:pb-[130px]">
         {program.image ? (
-          <div className="mx-auto w-full max-w-[560px]">
+          <div
+            ref={heroImageRef}
+            style={fade(heroImageInView)}
+            className="mx-auto w-[78%] max-w-[560px] md:w-full"
+          >
             <Image
               src={program.image}
               alt={program.name}
@@ -157,7 +162,11 @@ export default function ProgramPageClient({ program, detail }: ProgramPageClient
             />
           </div>
         ) : (
-          <div className="relative mx-auto flex aspect-[16/10] w-full max-w-[560px] items-center justify-center overflow-hidden rounded-sw bg-[repeating-linear-gradient(45deg,#1c0f24,#1c0f24_11px,#160b1d_11px,#160b1d_22px)]">
+          <div
+            ref={heroImageRef}
+            style={fade(heroImageInView)}
+            className="relative mx-auto flex aspect-[16/10] w-[78%] max-w-[560px] items-center justify-center overflow-hidden rounded-sw bg-[repeating-linear-gradient(45deg,#1c0f24,#1c0f24_11px,#160b1d_11px,#160b1d_22px)] md:w-full"
+          >
             <span className="font-satoshi text-xs uppercase tracking-[0.14em] text-cognac">
               Editorial still — program image
             </span>
