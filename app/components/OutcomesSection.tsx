@@ -30,7 +30,7 @@ export default function OutcomesSection({ label, outcomes }: OutcomesSectionProp
         const row = rowRef.current
         const label = labelRef.current
         const item = itemRefs.current[next]
-        if (window.innerWidth >= 768 && row && label && item) {
+        if (window.innerWidth >= 900 && row && label && item) {
           const rowRect = row.getBoundingClientRect()
           const itemRect = item.getBoundingClientRect()
           const y = itemRect.top - rowRect.top + itemRect.height / 2 - label.offsetHeight / 2

@@ -9,6 +9,7 @@ import ProgramListItem from './components/ProgramListItem'
 import BlogCard from './components/BlogCard'
 import CTAButtons from './components/CTAButtons'
 import { useInViewOnce } from './hooks/useInViewOnce'
+import { useAutoScrollStrip } from './hooks/useAutoScrollStrip'
 import { getBlogStripCards, getNavPosts } from './data/posts'
 import { PROGRAMS } from './data/programs'
 
@@ -96,27 +97,7 @@ export default function Home() {
     }
   }, [])
 
-  const stripRef = useRef<HTMLDivElement>(null)
-  const pausedRef = useRef(false)
-  const stripPosRef = useRef(0)
-
-  useEffect(() => {
-    let raf: number
-    function loop() {
-      const s = stripRef.current
-      if (s && !pausedRef.current) {
-        // The strip renders its card set twice back-to-back, so wrapping at the
-        // halfway point lands on an identical copy — the loop is seamless, no snap.
-        const setWidth = s.scrollWidth / 2
-        stripPosRef.current += 0.4
-        if (stripPosRef.current >= setWidth) stripPosRef.current -= setWidth
-        s.scrollLeft = stripPosRef.current
-      }
-      raf = requestAnimationFrame(loop)
-    }
-    raf = requestAnimationFrame(loop)
-    return () => cancelAnimationFrame(raf)
-  }, [])
+  const strip = useAutoScrollStrip<HTMLDivElement>()
 
   const { ref: introRef, inView: introInView } = useInViewOnce<HTMLDivElement>()
   const { ref: equationRef, inView: equationInView } = useInViewOnce<HTMLSpanElement>()
@@ -313,10 +294,12 @@ export default function Home() {
         </div>
 
         <div
-          ref={stripRef}
+          ref={strip.stripRef}
           data-hstrip
-          onMouseEnter={() => (pausedRef.current = true)}
-          onMouseLeave={() => (pausedRef.current = false)}
+          onMouseEnter={strip.onMouseEnter}
+          onMouseLeave={strip.onMouseLeave}
+          onTouchStart={strip.onTouchStart}
+          onTouchEnd={strip.onTouchEnd}
           className="flex gap-7 overflow-x-auto pb-10 pt-5"
         >
           {[...POSTS, ...POSTS].map((post, i) => (

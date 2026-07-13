@@ -34,12 +34,11 @@ export default function BlogGalleryCard({
       href={href}
       style={{
         aspectRatio: ratio,
-        height: 'clamp(280px, 36vw, 420px)',
         opacity: inView ? 1 : 0,
         transform: inView ? 'translateY(0)' : 'translateY(24px)',
         transition: 'opacity 800ms cubic-bezier(0.16,1,0.3,1), transform 800ms cubic-bezier(0.16,1,0.3,1)',
       }}
-      className="group relative flex-none overflow-hidden rounded-sw"
+      className="group relative w-full flex-none overflow-hidden rounded-sw md:w-auto md:h-[clamp(280px,36vw,420px)]"
     >
       <Image
         src={image}

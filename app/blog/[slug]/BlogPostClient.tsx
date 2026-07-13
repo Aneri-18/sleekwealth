@@ -6,6 +6,7 @@ import Nav from '../../components/Nav'
 import Footer from '../../components/Footer'
 import BlogCard from '../../components/BlogCard'
 import { useInViewOnce } from '../../hooks/useInViewOnce'
+import { useAutoScrollStrip } from '../../hooks/useAutoScrollStrip'
 import { getAdjacentPosts, getBlogStripCards, getFirstSentence, getNavPosts, type BlogPost } from '../../data/posts'
 
 const AUBERGINE = '#120818'
@@ -118,27 +119,7 @@ export default function BlogPostClient({ post }: BlogPostClientProps) {
     }
   }, [post.slug])
 
-  const stripRef = useRef<HTMLDivElement>(null)
-  const pausedRef = useRef(false)
-  const stripPosRef = useRef(0)
-
-  useEffect(() => {
-    let raf: number
-    function loop() {
-      const s = stripRef.current
-      if (s && !pausedRef.current) {
-        // The strip renders its card set twice back-to-back, so wrapping at the
-        // halfway point lands on an identical copy — the loop is seamless, no snap.
-        const setWidth = s.scrollWidth / 2
-        stripPosRef.current += 0.4
-        if (stripPosRef.current >= setWidth) stripPosRef.current -= setWidth
-        s.scrollLeft = stripPosRef.current
-      }
-      raf = requestAnimationFrame(loop)
-    }
-    raf = requestAnimationFrame(loop)
-    return () => cancelAnimationFrame(raf)
-  }, [])
+  const strip = useAutoScrollStrip<HTMLDivElement>()
 
   const { ref: relatedLabelRef, inView: relatedLabelInView } = useInViewOnce<HTMLParagraphElement>()
   const { ref: relatedHeadlineRef, inView: relatedHeadlineInView } = useInViewOnce<HTMLHeadingElement>()
@@ -362,10 +343,12 @@ export default function BlogPostClient({ post }: BlogPostClientProps) {
         </div>
 
         <div
-          ref={stripRef}
+          ref={strip.stripRef}
           data-hstrip
-          onMouseEnter={() => (pausedRef.current = true)}
-          onMouseLeave={() => (pausedRef.current = false)}
+          onMouseEnter={strip.onMouseEnter}
+          onMouseLeave={strip.onMouseLeave}
+          onTouchStart={strip.onTouchStart}
+          onTouchEnd={strip.onTouchEnd}
           className="flex gap-7 overflow-x-auto px-5 pb-2 md:px-16"
         >
           {[...POSTS, ...POSTS].map((p, i) => (
