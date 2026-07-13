@@ -35,7 +35,7 @@ export const PROGRAMS: Program[] = [
     detail: {
       achievements: ['Price Integrity', 'Signal Discipline', 'Margin Architecture'],
       paragraph:
-        'Every price you set is a claim about who you are. Drop it under pressure and you are not being competitive — you are rewriting the claim, one transaction at a time. Pricing Architecture is where we do that work — mapping what the price is actually signaling, then rebuilding the structure that lets you hold it under pressure. It is not a discounting strategy. It is not a spreadsheet exercise dressed up as brand work. It is a single, defensible answer to the only question that matters: what does this price protect, and why.',
+        'Every price you set is a claim about who you are. Drop it under pressure and you are not being competitive — you are rewriting the claim, one transaction at a time. Pricing Architecture is where that work happens — mapping what the price is actually signaling, then rebuilding the structure that lets you hold it under pressure. The output is a single, defensible answer to the only question that matters: what does this price protect, and why.',
       features: [
         { name: 'Price Audit', line: 'Every price point checked against what it actually signals.' },
         { name: 'Elasticity Mapping', line: 'Where the market will follow, and where it will not.' },
