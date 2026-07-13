@@ -51,7 +51,7 @@ export const PROGRAMS: Program[] = [
     detail: {
       achievements: ['Launch Readiness', 'Signal Sequencing', 'Category Entry'],
       paragraph:
-        'A launch is the one moment the market has no prior opinion of you — which means it is the one moment you cannot afford to be unclear. Launch Positioning is where we do that work — pressure-testing the signal before it reaches the market, then sequencing the reveal so nothing lands out of order. It is not a marketing calendar. It is not a hype plan with no substance behind it. It is a single, defensible answer to the only question that matters: what should the market believe the moment it first sees you, and why.',
+        'A launch is the one moment the market has no prior opinion of you; which means it is the one moment you cannot afford to be unclear. Launch Positioning is where that work happens; pressure-testing the signal before it reaches the market, then sequencing the reveal so nothing lands out of order. The output is a single, defensible answer to the only question that matters: what should the market believe the moment it first sees you, and why.',
       features: [
         { name: 'Signal Rehearsal', line: 'Every claim tested before the market ever sees it.' },
         { name: 'Sequencing', line: 'What reveals first, what follows, what waits.' },
@@ -67,7 +67,7 @@ export const PROGRAMS: Program[] = [
     detail: {
       achievements: ['Dilution Diagnosis', 'Signal Recovery', 'Decision Discipline'],
       paragraph:
-        'No single decision dilutes a brand. It is the discount that made sense in a slow quarter, the collaboration that seemed like exposure, the second line that seemed like growth — each reasonable alone, corrosive together. Brand Dilution Audit is where we do that work — tracing every decision back to what it actually cost the signal, then drawing the line that holds from here. It is not a teardown of past decisions. It is not a report that sits in a drawer. It is a single, defensible answer to the only question that matters: what is this brand still allowed to do, and why.',
+        'No single decision dilutes a brand. It is the discount that made sense in a slow quarter, the collaboration that seemed like exposure, the second line that seemed like growth. Each is reasonable alone, but corrosive together. Brand Dilution Audit is where that work happens; tracing every decision back to what it actually cost the signal, then drawing the line that holds from here. What survives the audit is what the brand is still allowed to do.',
       features: [
         { name: 'Dilution Map', line: 'Every decision that quietly cost the brand its signal.' },
         { name: 'Recovery Path', line: 'What can be undone, and what has to be outgrown.' },
@@ -83,7 +83,7 @@ export const PROGRAMS: Program[] = [
     detail: {
       achievements: ['Spatial Signal', 'Sensory Coherence', 'Material Language'],
       paragraph:
-        'The room is never just a room. It is signaling before a single word is spoken — in the material underfoot, the distance between fixtures, the light that decides what gets noticed first. Spatial Experience is where we do that work — reading the space for what it currently says, then rebuilding it to say what you intend. It is not a renovation brief. It is not a mood board with no discipline behind it. It is a single, defensible answer to the only question that matters: what does this room tell someone before they have met you, and why.',
+        'The room is never just a room. It is signaling before a single word is spoken; in the material underfoot, the distance between fixtures, the light that decides what gets noticed first. Spatial Experience is where that work happens; reading the space for what it currently says, then rebuilding it to say what you intend. That space, once finished, talks just as much about the brand as the product.',
       features: [
         { name: 'Spatial Audit', line: 'Every fixture and finish reviewed for what it signals.' },
         { name: 'Sensory Mapping', line: 'What is seen, touched, heard, and in what order.' },
@@ -95,11 +95,11 @@ export const PROGRAMS: Program[] = [
   {
     slug: 'founder-positioning',
     name: 'Founder Positioning',
-    line: 'You are visible. The question is whether your visibility is building the brand or diluting it.',
+    line: 'You are visible. The question is whether your visibility is making the brand or marring it.',
     detail: {
       achievements: ['Founder Signal', 'Narrative Control', 'Visibility Discipline'],
       paragraph:
-        "You are visible whether you intend to be or not — the only open question is what that visibility is doing to the brand. Founder Positioning is where we do that work — separating the founder's personal signal from the brand's, then deciding what belongs on which side. It is not a personal branding package. It is not a content calendar mistaken for strategy. It is a single, defensible answer to the only question that matters: what should the founder's visibility be building, and why.",
+        "You are visible whether you intend to be or not. The only open question is what that visibility is doing to the brand. Founder Positioning is where the work happens of separating the founder's personal signal from the brand's, then deciding what belongs on which side. What comes out the other side is a clear line: what the founder's visibility should be building, and what it should never touch.",
       features: [
         { name: 'Visibility Audit', line: 'Every public appearance reviewed for what it actually signals.' },
         { name: 'Narrative Architecture', line: "The story the founder is allowed to tell, and where it stops." },
@@ -115,7 +115,7 @@ export const PROGRAMS: Program[] = [
     detail: {
       achievements: ['Heritage Leverage', 'Modern Signal', 'Continuity Design'],
       paragraph:
-        "Heritage buys trust no new brand can manufacture — until the story stops moving and starts explaining why the brand hasn't. Legacy Brand Modernisation is where we do that work — separating what the heritage still earns from what it now excuses, then rebuilding the brand to carry both eras at once. It is not a rebrand that erases the archive. It is not a nostalgia campaign standing in for progress. It is a single, defensible answer to the only question that matters: what does this heritage still deserve to say, and why.",
+        "Heritage buys trust no new brand can manufacture. Until the story stops moving and starts explaining why the brand hasn't. Legacy Brand Modernisation is where that work happens, separating what the heritage still earns from what it now excuses, then rebuilding the brand to carry both eras at once. What survives is a heritage that still gets to speak, on terms that hold today.",
       features: [
         { name: 'Heritage Audit', line: 'What the archive still earns, and what it now excuses.' },
         { name: 'Modern Signal', line: 'The language that proves the brand is still moving.' },
@@ -131,7 +131,7 @@ export const PROGRAMS: Program[] = [
     detail: {
       achievements: ['Material Signal', 'Sensory Trust', 'Tactile Coherence'],
       paragraph:
-        'The hand knows before the mind decides — the weight of an object, the resistance of a clasp, the temperature of a material are read and judged before a single claim is made. Tactile Brand Experience is where we do that work — auditing what the product says on contact, then rebuilding it to say what you intend before anyone reads a word. It is not a packaging refresh. It is not a materials swap for its own sake. It is a single, defensible answer to the only question that matters: what does this object tell someone the instant they hold it, and why.',
+        'The hand knows before the mind decides. The weight of an object, the resistance of a clasp, the temperature of a material are read and judged before a mental claim is made. Tactile Brand Experience is where that work happens; auditing what the product says on contact, then rebuilding it to say what you intend before anyone reads a word. What it tells someone the instant they hold it is no longer left to chance.',
       features: [
         { name: 'Material Audit', line: 'Every surface and weight reviewed for what it signals on contact.' },
         { name: 'Sensory Mapping', line: 'What is felt first, and what that sets up.' },
