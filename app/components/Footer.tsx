@@ -53,7 +53,12 @@ export default function Footer() {
         >
           LinkedIn
         </a>
-        <a href="#" className="font-satoshi text-[13px] tracking-[0.08em] text-cognac">
+        <a
+          href="https://www.instagram.com/anerishahluxury/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="font-satoshi text-[13px] tracking-[0.08em] text-cognac"
+        >
           Instagram
         </a>
       </div>
