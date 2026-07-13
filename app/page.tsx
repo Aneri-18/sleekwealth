@@ -48,10 +48,15 @@ export default function Home() {
   const rootRef = useRef<HTMLDivElement>(null)
   const [bg, setBg] = useState(AUBERGINE)
   const [headShown, setHeadShown] = useState(false)
-  const [boxShown, setBoxShown] = useState({ L: false, R: false, F: false })
+  const [phrasesShown, setPhrasesShown] = useState(false)
 
   useEffect(() => {
     const t = setTimeout(() => setHeadShown(true), 200)
+    return () => clearTimeout(t)
+  }, [])
+
+  useEffect(() => {
+    const t = setTimeout(() => setPhrasesShown(true), 550)
     return () => clearTimeout(t)
   }, [])
 
@@ -70,15 +75,6 @@ export default function Home() {
         })
         setBg((prev) => (prev !== target ? target : prev))
       }
-
-      const y = window.scrollY
-      setBoxShown((prev) => {
-        const next = { ...prev }
-        if (!next.L && y >= 20) next.L = true
-        if (!next.R && y >= 90) next.R = true
-        if (!next.F && y >= 160) next.F = true
-        return prev.L === next.L && prev.R === next.R && prev.F === next.F ? prev : next
-      })
 
       ticking = false
     }
@@ -117,6 +113,13 @@ export default function Home() {
     transition: `opacity 800ms cubic-bezier(0.16,1,0.3,1) ${delayMs}ms, transform 800ms cubic-bezier(0.16,1,0.3,1) ${delayMs}ms`,
   })
 
+  const revealPhrase = (delayMs = 0) => ({
+    opacity: phrasesShown ? 1 : 0,
+    transform: phrasesShown ? 'translateY(0) scale(1)' : 'translateY(26px) scale(0.94)',
+    filter: phrasesShown ? 'blur(0px)' : 'blur(6px)',
+    transition: `opacity 1000ms cubic-bezier(0.16,1,0.3,1) ${delayMs}ms, transform 1000ms cubic-bezier(0.16,1,0.3,1) ${delayMs}ms, filter 1000ms cubic-bezier(0.16,1,0.3,1) ${delayMs}ms`,
+  })
+
   const wipe = (inView: boolean, ms = 1000) => ({
     clipPath: inView ? 'inset(0 0% 0 0)' : 'inset(0 105% 0 0)',
     transition: `clip-path ${ms}ms cubic-bezier(0.16,1,0.3,1)`,
@@ -149,19 +152,19 @@ export default function Home() {
         </h1>
 
         <div className="flex w-full flex-wrap items-start justify-center gap-4">
-          <div className="w-full sm:w-auto" style={fade(boxShown.L)}>
-            <div className="cursor-default whitespace-normal rounded-[26px] border border-cognac px-6 py-4 text-center text-base leading-[1.7] text-parchment transition-[transform,background-color,border-color] duration-300 ease-out hover:scale-[1.04] hover:border-transparent hover:bg-bordeaux sm:mx-auto sm:w-fit sm:whitespace-nowrap sm:px-8">
+          <div className="w-full sm:w-auto" style={revealPhrase(0)}>
+            <div className="cursor-default whitespace-normal rounded-[32px] border border-cognac px-6 py-4 text-center text-base leading-[1.7] text-parchment transition-[transform,background-color,border-color] duration-300 ease-out hover:scale-[1.04] hover:border-transparent hover:bg-bordeaux sm:mx-auto sm:w-fit sm:whitespace-nowrap sm:px-8">
               And like any language, fluency takes years to build.
             </div>
           </div>
-          <div className="w-full sm:w-auto" style={fade(boxShown.R)}>
-            <div className="cursor-default whitespace-normal rounded-[26px] border border-cognac px-6 py-4 text-center text-base leading-[1.7] text-parchment transition-[transform,background-color,border-color] duration-300 ease-out hover:scale-[1.04] hover:border-transparent hover:bg-bordeaux sm:mx-auto sm:w-fit sm:whitespace-nowrap sm:px-8">
+          <div className="w-full sm:w-auto" style={revealPhrase(160)}>
+            <div className="cursor-default whitespace-normal rounded-[32px] border border-cognac px-6 py-4 text-center text-base leading-[1.7] text-parchment transition-[transform,background-color,border-color] duration-300 ease-out hover:scale-[1.04] hover:border-transparent hover:bg-bordeaux sm:mx-auto sm:w-fit sm:whitespace-nowrap sm:px-8">
               If luxury and premium is your space, then Sleek Wealth was built for you.
             </div>
           </div>
         </div>
-        <div className="mt-4 flex w-full justify-center" style={fade(boxShown.F)}>
-          <div className="w-full cursor-default whitespace-normal rounded-[26px] border border-cognac px-6 py-4 text-center text-base leading-[1.7] text-parchment transition-[transform,background-color,border-color] duration-300 ease-out hover:scale-[1.04] hover:border-transparent hover:bg-bordeaux sm:mx-auto sm:w-fit sm:whitespace-nowrap sm:px-8">
+        <div className="mt-4 flex w-full justify-center" style={revealPhrase(320)}>
+          <div className="w-full cursor-default whitespace-normal rounded-[32px] border border-cognac px-6 py-4 text-center text-base leading-[1.7] text-parchment transition-[transform,background-color,border-color] duration-300 ease-out hover:scale-[1.04] hover:border-transparent hover:bg-bordeaux sm:mx-auto sm:w-fit sm:whitespace-nowrap sm:px-8">
             To help you master this fluency faster.
           </div>
         </div>
