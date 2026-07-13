@@ -25,7 +25,7 @@ export default function CTAButtons({ className = '' }: CTAButtonsProps) {
   )}`
 
   return (
-    <div className={`flex w-full flex-nowrap justify-start gap-2.5 ${className}`}>
+    <div className={`flex w-full flex-nowrap justify-center gap-2.5 ${className}`}>
       <a
         href={whatsappHref}
         target="_blank"
