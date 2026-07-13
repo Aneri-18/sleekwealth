@@ -10,26 +10,21 @@ import BlogCard from './components/BlogCard'
 import CTAButtons from './components/CTAButtons'
 import { useInViewOnce } from './hooks/useInViewOnce'
 import { getBlogStripCards, getNavPosts } from './data/posts'
+import { PROGRAMS } from './data/programs'
 
 const AUBERGINE = '#120818'
 const BORDEAUX = '#4A0E1A'
 
-const WORK_ITEMS = [
-  {
-    name: 'Positioning Clarity',
-    line: "Your brand is saying something. The question is whether it's saying what you intend.",
-  },
-  { name: 'Pricing Architecture', line: 'Price is not a number. It is a signal.' },
-  {
-    name: 'Brand Dilution Audit',
-    line: 'A discount. A collaboration. A second line. Each felt reasonable at the time.',
-  },
-  {
-    name: 'Founder Positioning',
-    line: 'You are visible. The question is whether your visibility is building the brand or diluting it.',
-  },
-  { name: 'Spatial Experience', line: 'The room is never just a room.' },
+const HOMEPAGE_WORK_SLUGS = [
+  'positioning-clarity',
+  'pricing-architecture',
+  'brand-dilution-audit',
+  'founder-positioning',
+  'spatial-experience',
 ]
+const WORK_ITEMS = HOMEPAGE_WORK_SLUGS.map(
+  (slug) => PROGRAMS.find((p) => p.slug === slug)!
+)
 
 const STEPS = [
   { num: '1', title: 'Reach Out.', body: 'Just say Hello.' },
@@ -254,7 +249,12 @@ export default function Home() {
 
           <div className="flex flex-col">
             {WORK_ITEMS.map((item) => (
-              <ProgramListItem key={item.name} name={item.name} description={item.line} />
+              <ProgramListItem
+                key={item.slug}
+                name={item.name}
+                description={item.line}
+                href={item.detail ? `/work/${item.slug}` : '#'}
+              />
             ))}
             <div className="border-t border-cognac" />
           </div>
