@@ -27,7 +27,7 @@ export default function ProgramListItem({
         >
           {description}
         </span>
-        <span className="ml-auto shrink-0 -translate-x-2 font-satoshi text-[22px] text-cognac opacity-0 transition-[opacity,transform] duration-300 ease-out group-hover:translate-x-0 group-hover:opacity-100">
+        <span className="ml-auto shrink-0 font-satoshi text-[22px] text-cognac opacity-100 transition-[opacity,transform] duration-300 ease-out md:-translate-x-2 md:opacity-0 md:group-hover:translate-x-0 md:group-hover:opacity-100">
           →
         </span>
       </div>

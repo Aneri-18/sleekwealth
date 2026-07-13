@@ -33,7 +33,7 @@ export default function BlogCard({
         )}
       </div>
       <div className="pt-5">
-        <h3 className="font-vollkorn text-[22px] leading-[1.35] text-parchment">{title}</h3>
+        <h3 className="font-vollkorn text-[15px] leading-[1.3] text-parchment md:text-[22px] md:leading-[1.35]">{title}</h3>
         <div className="mt-3 flex items-center gap-3.5 opacity-0 transition-opacity duration-300 ease-out group-hover:opacity-100">
           <span className="font-satoshi text-[13px] text-parchment/85">{author}</span>
           <span className="font-satoshi text-[13px] text-cognac">{read}</span>
