@@ -230,6 +230,10 @@ export const POSTS: BlogPost[] = [
     subheadingOverride: 'There is no 4th category.',
     bodyHtml: `
 <p>In the last piece, I introduced The Luxury Spectrum&trade;, a framework for understanding the luxury market from both sides. The Brand side and the Consumer side.</p>
+<figure style="margin:2.5rem 0;display:flex;flex-direction:column;gap:0.75rem;">
+<img src="/blog/the-three-types-of-luxury-consumers/gallery-0-overview.png" alt="The Luxury Spectrum diagram, showing five brand positioning levels from Bespoke to Accessible" width="6250" height="4830" loading="lazy" style="width:100%;height:auto;border-radius:10px;display:block;" />
+<figcaption style="font-family:var(--font-satoshi);font-size:13px;color:rgba(237,232,220,0.6);text-align:center;">The Luxury Spectrum&trade;</figcaption>
+</figure>
 <p>Today we go inside the Consumer.</p>
 <p>Because here is what most luxury brands fundamentally misunderstand; they think their consumer is one person. One archetype. One income bracket. One aspiration.</p>
 <p>They are not.</p>
