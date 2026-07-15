@@ -18,6 +18,15 @@ export default function ExpandingContainer({
 }: ExpandingContainerProps) {
   const wrapperRef = useRef<HTMLDivElement>(null)
   const [progress, setProgress] = useState(0)
+  const [isDesktop, setIsDesktop] = useState(false)
+
+  useEffect(() => {
+    const mq = window.matchMedia('(min-width: 900px)')
+    setIsDesktop(mq.matches)
+    const onChange = (e: MediaQueryListEvent) => setIsDesktop(e.matches)
+    mq.addEventListener('change', onChange)
+    return () => mq.removeEventListener('change', onChange)
+  }, [])
 
   useEffect(() => {
     let ticking = false
@@ -45,7 +54,7 @@ export default function ExpandingContainer({
     }
   }, [])
 
-  const width = 60 + progress * 32 // 60% -> 92%
+  const scale = 60 / 92 + progress * (1 - 60 / 92) // ~0.652 -> 1
   const parallaxY = (progress - 0.5) * -60 // px
 
   const hasAsset = Boolean(imageSrc || videoSrc)
@@ -53,8 +62,13 @@ export default function ExpandingContainer({
   return (
     <div ref={wrapperRef} className="flex w-full justify-center">
       <div
-        className="aspect-[3/4] overflow-hidden rounded-sw transition-[width] duration-[250ms] ease-out md:aspect-[16/9]"
-        style={{ width: `${width}%`, maxWidth: 1200 }}
+        className="overflow-hidden rounded-sw transition-[transform] duration-[250ms] ease-out"
+        style={{
+          width: '92%',
+          maxWidth: 1200,
+          aspectRatio: isDesktop ? '16/9' : '3/4',
+          transform: `scale(${scale})`,
+        }}
       >
         <div
           className="relative flex h-[130%] w-full items-center justify-center bg-[repeating-linear-gradient(45deg,#1c0f24,#1c0f24_11px,#160b1d_11px,#160b1d_22px)]"
