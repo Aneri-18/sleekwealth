@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { getBlogStripCards, getNavPosts } from '../data/posts-server'
 import AboutPageClient from './AboutPageClient'
 
 export const metadata: Metadata = {
@@ -17,5 +18,7 @@ export const metadata: Metadata = {
 }
 
 export default function AboutPage() {
-  return <AboutPageClient />
+  const posts = getBlogStripCards()
+  const navPosts = getNavPosts()
+  return <AboutPageClient posts={posts} navPosts={navPosts} />
 }

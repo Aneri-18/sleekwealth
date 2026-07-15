@@ -4,39 +4,37 @@ import { useEffect, useRef, useState } from 'react'
 import Nav from '../components/Nav'
 import Footer from '../components/Footer'
 import BlogGalleryCard from '../components/BlogGalleryCard'
-import { BLOG_CATEGORIES, categorySlug, getAllPosts, getNavPosts, type BlogCategory } from '../data/posts'
+import { BLOG_CATEGORIES, categorySlug, type BlogCategory } from '../data/posts'
+import type { NavPost } from '../data/posts-server'
 
 const AUBERGINE = '#120818'
 const BORDEAUX = '#4A0E1A'
 
-const RATIOS: Record<string, string> = {
-  'the-three-types-of-luxury-consumers': '3/4',
+export interface GalleryPost {
+  href: string
+  image: string
+  title: string
+  date: string
+  read: string
+  author: string
+  category: BlogCategory
+  ratio: string
 }
 
-const ALL_POSTS = getAllPosts()
+interface BlogIndexClientProps {
+  galleryPosts: GalleryPost[]
+  navPosts: NavPost[]
+}
 
-const NAV_POSTS = getNavPosts()
-
-const GALLERY_POSTS = ALL_POSTS.map((p) => ({
-  href: `/blog/${p.slug}`,
-  image: p.featuredImage,
-  title: p.title,
-  date: new Date(p.publishedAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
-  read: `${p.readingTime} min read`,
-  author: p.authorName,
-  category: p.category,
-  ratio: RATIOS[p.slug] ?? '4/3',
-}))
-
-export default function BlogIndexClient() {
+export default function BlogIndexClient({ galleryPosts, navPosts }: BlogIndexClientProps) {
   const rootRef = useRef<HTMLDivElement>(null)
   const [bg, setBg] = useState(AUBERGINE)
   const [headShown, setHeadShown] = useState(false)
   const [activeCategory, setActiveCategory] = useState<BlogCategory | null>(null)
 
   const visiblePosts = activeCategory
-    ? GALLERY_POSTS.filter((p) => p.category === activeCategory)
-    : GALLERY_POSTS
+    ? galleryPosts.filter((p) => p.category === activeCategory)
+    : galleryPosts
 
   useEffect(() => {
     const t = setTimeout(() => setHeadShown(true), 200)
@@ -81,7 +79,7 @@ export default function BlogIndexClient() {
       style={{ backgroundColor: bg, transition: 'background-color 700ms ease' }}
       className="relative min-h-screen overflow-x-clip text-parchment"
     >
-      <Nav bg={bg} recentPosts={NAV_POSTS} />
+      <Nav bg={bg} recentPosts={navPosts} />
 
       {/* SECTION 1 — HERO */}
       <section

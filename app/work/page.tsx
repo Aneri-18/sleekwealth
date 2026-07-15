@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { getBlogStripCards, getNavPosts } from '../data/posts-server'
 import WorkPageClient from './WorkPageClient'
 
 export const metadata: Metadata = {
@@ -17,5 +18,7 @@ export const metadata: Metadata = {
 }
 
 export default function WorkPage() {
-  return <WorkPageClient />
+  const posts = getBlogStripCards()
+  const navPosts = getNavPosts()
+  return <WorkPageClient posts={posts} navPosts={navPosts} />
 }

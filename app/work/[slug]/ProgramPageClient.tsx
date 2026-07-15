@@ -12,20 +12,19 @@ import ProgramStack from '../../components/ProgramStack'
 import { useInViewOnce } from '../../hooks/useInViewOnce'
 import { useAutoScrollStrip } from '../../hooks/useAutoScrollStrip'
 import { PROGRAMS, type Program, type ProgramDetail } from '../../data/programs'
-import { getBlogStripCards, getNavPosts } from '../../data/posts'
+import type { BlogStripCard, NavPost } from '../../data/posts-server'
 
 const AUBERGINE = '#120818'
 const BORDEAUX = '#4A0E1A'
 
-const POSTS = getBlogStripCards()
-const NAV_POSTS = getNavPosts()
-
 interface ProgramPageClientProps {
   program: Program
   detail: ProgramDetail
+  posts: BlogStripCard[]
+  navPosts: NavPost[]
 }
 
-export default function ProgramPageClient({ program, detail }: ProgramPageClientProps) {
+export default function ProgramPageClient({ program, detail, posts, navPosts }: ProgramPageClientProps) {
   const currentIndex = PROGRAMS.findIndex((p) => p.slug === program.slug)
   const index = currentIndex + 1
   const otherPrograms = [
@@ -105,7 +104,7 @@ export default function ProgramPageClient({ program, detail }: ProgramPageClient
       style={{ backgroundColor: bg, transition: 'background-color 700ms ease' }}
       className="relative min-h-screen overflow-x-clip text-parchment"
     >
-      <Nav bg={bg} recentPosts={NAV_POSTS} />
+      <Nav bg={bg} recentPosts={navPosts} />
 
       {/* SECTION 1 — HERO */}
       <section
@@ -257,7 +256,7 @@ export default function ProgramPageClient({ program, detail }: ProgramPageClient
           onTouchEnd={strip.onTouchEnd}
           className="flex gap-7 overflow-x-auto pb-10 pt-5"
         >
-          {[...POSTS, ...POSTS].map((post, i) => (
+          {[...posts, ...posts].map((post, i) => (
             <BlogCard key={`${post.href}-${i}`} {...post} />
           ))}
         </div>

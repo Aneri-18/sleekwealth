@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { PROGRAMS } from '../../data/programs'
+import { getBlogStripCards, getNavPosts } from '../../data/posts-server'
 import ProgramPageClient from './ProgramPageClient'
 
 export async function generateMetadata({
@@ -38,5 +39,8 @@ export default async function ProgramPage({ params }: { params: Promise<{ slug: 
     notFound()
   }
 
-  return <ProgramPageClient program={program} detail={program.detail} />
+  const posts = getBlogStripCards()
+  const navPosts = getNavPosts()
+
+  return <ProgramPageClient program={program} detail={program.detail} posts={posts} navPosts={navPosts} />
 }

@@ -1,6 +1,6 @@
 import type { MetadataRoute } from 'next'
 import { PROGRAMS } from './data/programs'
-import { getAllPosts } from './data/posts'
+import { getAllPosts } from './data/posts-server'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000'
 

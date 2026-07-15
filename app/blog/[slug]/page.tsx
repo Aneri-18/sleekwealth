@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import { getPostBySlug } from '../../data/posts'
+import { getAdjacentPosts, getBlogStripCards, getNavPosts, getPostBySlug } from '../../data/posts-server'
 import BlogPostClient from './BlogPostClient'
 
 export async function generateMetadata({
@@ -40,5 +40,17 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     notFound()
   }
 
-  return <BlogPostClient post={post} />
+  const navPosts = getNavPosts()
+  const stripPosts = getBlogStripCards(5, post.slug)
+  const { previous, next } = getAdjacentPosts(post.slug)
+
+  return (
+    <BlogPostClient
+      post={post}
+      navPosts={navPosts}
+      stripPosts={stripPosts}
+      previousPost={previous}
+      nextPost={next}
+    />
+  )
 }

@@ -7,19 +7,22 @@ import Footer from '../../components/Footer'
 import BlogCard from '../../components/BlogCard'
 import { useInViewOnce } from '../../hooks/useInViewOnce'
 import { useAutoScrollStrip } from '../../hooks/useAutoScrollStrip'
-import { getAdjacentPosts, getBlogStripCards, getFirstSentence, getNavPosts, type BlogPost } from '../../data/posts'
+import { getFirstSentence, type BlogPost } from '../../data/posts'
+import type { AdjacentPosts, BlogStripCard, NavPost } from '../../data/posts-server'
 
 const AUBERGINE = '#120818'
 const BORDEAUX = '#4A0E1A'
 const WHATSAPP_NUMBER = '919987357331'
 
-const NAV_POSTS = getNavPosts()
-
 interface BlogPostClientProps {
   post: BlogPost
+  navPosts: NavPost[]
+  stripPosts: BlogStripCard[]
+  previousPost: AdjacentPosts['previous']
+  nextPost: AdjacentPosts['next']
 }
 
-export default function BlogPostClient({ post }: BlogPostClientProps) {
+export default function BlogPostClient({ post, navPosts, stripPosts, previousPost, nextPost }: BlogPostClientProps) {
   const rootRef = useRef<HTMLDivElement>(null)
   const articleRef = useRef<HTMLDivElement>(null)
   const { ref: subheadingRef, inView: subheadingInView } = useInViewOnce<HTMLParagraphElement>()
@@ -29,8 +32,8 @@ export default function BlogPostClient({ post }: BlogPostClientProps) {
   const [shareUrl, setShareUrl] = useState('')
   const [linkCopied, setLinkCopied] = useState(false)
 
-  const POSTS = getBlogStripCards(5, post.slug)
-  const { previous, next } = getAdjacentPosts(post.slug)
+  const previous = previousPost
+  const next = nextPost
 
   // Stable reference so the dangerouslySetInnerHTML div isn't reconciled (and its
   // manually-animated headings reset) on every unrelated re-render (e.g. shareUrl).
@@ -176,7 +179,7 @@ export default function BlogPostClient({ post }: BlogPostClientProps) {
       style={{ backgroundColor: bg, transition: 'background-color 700ms ease' }}
       className="relative min-h-screen overflow-x-clip text-parchment"
     >
-      <Nav bg={bg} recentPosts={NAV_POSTS} />
+      <Nav bg={bg} recentPosts={navPosts} />
 
       {/* SECTION 1 — BREADCRUMB + HERO IMAGE */}
       <section data-bg="aubergine" className="flex flex-col items-center px-5 pt-[150px] md:px-16">
@@ -351,7 +354,7 @@ export default function BlogPostClient({ post }: BlogPostClientProps) {
           onTouchEnd={strip.onTouchEnd}
           className="flex gap-7 overflow-x-auto px-5 pb-2 md:px-16"
         >
-          {[...POSTS, ...POSTS].map((p, i) => (
+          {[...stripPosts, ...stripPosts].map((p, i) => (
             <BlogCard key={`${p.href}-${i}`} {...p} />
           ))}
         </div>

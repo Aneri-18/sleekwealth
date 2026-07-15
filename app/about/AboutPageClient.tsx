@@ -7,15 +7,17 @@ import BlogCard from '../components/BlogCard'
 import CTAButtons from '../components/CTAButtons'
 import { useInViewOnce } from '../hooks/useInViewOnce'
 import { useAutoScrollStrip } from '../hooks/useAutoScrollStrip'
-import { getBlogStripCards, getNavPosts } from '../data/posts'
+import type { BlogStripCard, NavPost } from '../data/posts-server'
 
 const AUBERGINE = '#120818'
 const BORDEAUX = '#4A0E1A'
 
-const POSTS = getBlogStripCards()
-const NAV_POSTS = getNavPosts()
+interface AboutPageClientProps {
+  posts: BlogStripCard[]
+  navPosts: NavPost[]
+}
 
-export default function AboutPageClient() {
+export default function AboutPageClient({ posts, navPosts }: AboutPageClientProps) {
   const rootRef = useRef<HTMLDivElement>(null)
   const [bg, setBg] = useState(AUBERGINE)
   const [headShown, setHeadShown] = useState(false)
@@ -95,7 +97,7 @@ export default function AboutPageClient() {
       style={{ backgroundColor: bg, transition: 'background-color 700ms ease' }}
       className="relative min-h-screen overflow-x-clip text-parchment"
     >
-      <Nav bg={bg} recentPosts={NAV_POSTS} />
+      <Nav bg={bg} recentPosts={navPosts} />
 
       {/* SECTION 1 — HERO */}
       <section
@@ -216,7 +218,7 @@ export default function AboutPageClient() {
           onTouchEnd={strip.onTouchEnd}
           className="flex gap-7 overflow-x-auto pb-10 pt-5"
         >
-          {[...POSTS, ...POSTS].map((post, i) => (
+          {[...posts, ...posts].map((post, i) => (
             <BlogCard key={`${post.href}-${i}`} {...post} />
           ))}
         </div>
