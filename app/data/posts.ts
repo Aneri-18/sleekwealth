@@ -121,6 +121,10 @@ export const POSTS: BlogPost[] = [
     bodyHtml: `
 <p>Two things have been established in this series. Luxury is not a singular concept. And the luxury consumer is not one person.</p>
 <p>In the first two parts we mapped three distinct consumer types &mdash; Access, Ownership, and Logos &mdash; each with a different relationship with luxury and a different reason to buy.</p>
+<figure style="margin:2.5rem 0;display:flex;flex-direction:column;gap:0.75rem;">
+<img src="/blog/the-five-types-of-luxury-brands-and-why-the-better-ones-never-fit-into-just-one/gallery-0-overview.png" alt="The Luxury Spectrum diagram, showing five brand positioning levels from Bespoke to Accessible" width="6250" height="4830" loading="lazy" style="width:100%;height:auto;border-radius:10px;display:block;" />
+<figcaption style="font-family:var(--font-satoshi);font-size:13px;color:rgba(237,232,220,0.6);text-align:center;">The Luxury Spectrum&trade;</figcaption>
+</figure>
 <p>Now we turn to the brand side.</p>
 <p>Most brands have spent years confusing price with positioning. Price is what you charge. Positioning is what the market has already decided about you. One is a number. The other is a verdict.</p>
 <p>The Luxury Spectrum&trade; maps brands across five levels of positioning.</p>
@@ -129,8 +133,8 @@ export const POSTS: BlogPost[] = [
 <p>The Luxury Spectrum&trade; maps brands across five levels of positioning. Not price. Positioning. Price is merely a byproduct of where you sit on The Luxury Spectrum&trade;, never the lead.</p>
 <h2>Level 1 &mdash; Bespoke</h2>
 <figure style="margin:2.5rem 0;display:flex;flex-direction:column;gap:0.75rem;">
-<img src="/blog/the-five-types-of-luxury-brands-and-why-the-better-ones-never-fit-into-just-one/gallery-1-bespoke.png" alt="The Luxury Spectrum diagram, showing five brand positioning levels from Bespoke to Accessible" width="6250" height="4830" loading="lazy" style="width:100%;height:auto;border-radius:10px;display:block;" />
-<figcaption style="font-family:var(--font-satoshi);font-size:13px;color:rgba(237,232,220,0.6);text-align:center;">The Luxury Spectrum&trade;</figcaption>
+<img src="/blog/the-five-types-of-luxury-brands-and-why-the-better-ones-never-fit-into-just-one/gallery-1-bespoke.png" alt="The Luxury Spectrum diagram with Bespoke highlighted as the first brand positioning level" width="6251" height="2841" loading="lazy" style="width:100%;height:auto;border-radius:10px;display:block;" />
+<figcaption style="font-family:var(--font-satoshi);font-size:13px;color:rgba(237,232,220,0.6);text-align:center;">The Luxury Spectrum&trade; &mdash; Bespoke</figcaption>
 </figure>
 <p>At this level there is only a relationship. Everything made here exists for one person, one purpose, one moment. The Bespoke brand selects its consumer as carefully as its materials. Access is earned through years of loyalty and craft is never rushed.</p>
 <p>The final object &mdash; whether a gown, a timepiece, or a jewel &mdash; carries the full weight of that intention.</p>
