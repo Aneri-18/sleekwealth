@@ -31,6 +31,9 @@ export interface BlogPost {
   featuredImageWidth: number
   featuredImageHeight: number
   publishedAt: string
+  // Set automatically on every Pixie save (draft or publish) — absent on posts
+  // migrated before this field existed, until they're next saved.
+  updatedAt?: string
   readingTime: number
   bodyHtml: string
   status: 'draft' | 'published'

@@ -78,6 +78,7 @@ export async function POST(request: NextRequest) {
     featuredImageWidth: Number(featuredImageWidth) || 0,
     featuredImageHeight: Number(featuredImageHeight) || 0,
     publishedAt: typeof publishedAt === 'string' && publishedAt ? publishedAt : new Date().toISOString().slice(0, 10),
+    updatedAt: new Date().toISOString().slice(0, 10),
     readingTime,
     status,
     ...(typeof subheadingOverride === 'string' && subheadingOverride.trim()
