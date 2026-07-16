@@ -16,7 +16,10 @@ if (!username.trim() || !password.trim()) {
 }
 
 const hash = bcrypt.hashSync(password, 12)
+// Next.js expands `$VAR` references in .env files, so literal `$` in the
+// bcrypt hash must be escaped or it gets silently mangled on load.
+const escapedHash = hash.replaceAll('$', '\\$')
 
 console.log('\nAdd these two lines to .env.local:\n')
 console.log(`ADMIN_USERNAME=${username.trim()}`)
-console.log(`ADMIN_PASSWORD_HASH=${hash}`)
+console.log(`ADMIN_PASSWORD_HASH=${escapedHash}`)
