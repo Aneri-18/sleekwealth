@@ -254,7 +254,7 @@ export default function BlogPostClient({ post, navPosts, stripPosts, previousPos
       <section data-bg="aubergine" className="px-5 pb-[60px] md:px-16">
         <div
           ref={articleRef}
-          className="mx-auto max-w-[720px] space-y-6 text-base leading-[1.8] text-parchment md:text-lg [&>h2]:my-10 [&>h2]:font-vollkorn [&>h2]:text-[26px] [&>h2]:font-medium [&>h2]:leading-[1.3] [&>h3]:my-10 [&>h3]:font-vollkorn [&>h3]:text-[21px] [&>h3]:font-medium [&>h3]:leading-[1.3] [&>ol]:list-decimal [&>ol]:space-y-2 [&>ol]:pl-6 [&_a]:text-cognac [&_a]:underline [&_a]:decoration-cognac/50 [&_a]:underline-offset-2 [&_em]:italic [&_strong]:font-semibold [&_strong]:text-parchment md:[&>h2]:text-[32px] md:[&>h3]:text-[24px]"
+          className="mx-auto max-w-[720px] space-y-6 text-base leading-[1.8] text-parchment md:text-lg [&>h2]:my-10 [&>h2]:font-vollkorn [&>h2]:text-[26px] [&>h2]:font-medium [&>h2]:leading-[1.3] [&>h3]:my-10 [&>h3]:font-vollkorn [&>h3]:text-[21px] [&>h3]:font-medium [&>h3]:leading-[1.3] [&>ol]:list-decimal [&>ol]:space-y-2 [&>ol]:pl-6 [&_a]:text-cognac [&_a]:underline [&_a]:decoration-cognac/50 [&_a]:underline-offset-2 [&_em]:italic [&_strong]:font-semibold [&_strong]:text-parchment [&>p:empty]:block [&>p:empty]:h-[1.8em] md:[&>h2]:text-[32px] md:[&>h3]:text-[24px]"
           dangerouslySetInnerHTML={bodyHtmlProp}
         />
       </section>
