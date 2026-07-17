@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import { useEffect, useRef, useState } from 'react'
 import Nav from '../components/Nav'
 import Footer from '../components/Footer'
@@ -131,15 +132,21 @@ export default function AboutPageClient({ posts, navPosts }: AboutPageClientProp
           <div
             ref={parallaxWrapRef}
             style={fade(founderInView)}
-            className="relative mx-auto aspect-[4/5] w-full max-w-[320px] overflow-hidden rounded-sw bg-[repeating-linear-gradient(45deg,#1c0f24,#1c0f24_11px,#160b1d_11px,#160b1d_22px)] md:mx-0 md:max-w-none"
+            className="relative mx-auto aspect-[4/5] w-full max-w-[320px] overflow-hidden rounded-sw md:mx-0 md:max-w-none"
           >
             <div
               ref={parallaxRef}
-              className="absolute -top-[10%] left-0 flex h-[120%] w-full items-center justify-center will-change-transform"
+              className="absolute -top-[10%] left-0 h-[120%] w-full will-change-transform"
             >
-              <span className="font-satoshi text-xs uppercase tracking-[0.14em] text-cognac">
-                Aneri Shah — photo
-              </span>
+              <Image
+                src="/about/founder.jpg"
+                alt="Aneri Shah"
+                width={768}
+                height={1191}
+                unoptimized
+                priority
+                className="h-full w-full object-cover"
+              />
             </div>
           </div>
 
