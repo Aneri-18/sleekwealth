@@ -143,7 +143,7 @@ export default function AboutPageClient({ posts, navPosts }: AboutPageClientProp
                 alt="Aneri Shah"
                 width={768}
                 height={1191}
-                unoptimized
+                quality={95}
                 priority
                 className="h-full w-full object-cover"
               />

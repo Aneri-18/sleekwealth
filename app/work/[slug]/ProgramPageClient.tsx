@@ -154,7 +154,8 @@ export default function ProgramPageClient({ program, detail, posts, navPosts }: 
               alt={program.name}
               width={program.imageWidth ?? 1280}
               height={program.imageHeight ?? 960}
-              unoptimized
+              sizes="(max-width: 768px) 78vw, 90vw"
+              quality={95}
               priority
               className="mx-auto block rounded-sw"
               style={{ width: 'auto', height: 'auto', maxWidth: '100%', maxHeight: '65vh' }}

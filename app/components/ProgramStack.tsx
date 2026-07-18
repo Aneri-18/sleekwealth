@@ -72,7 +72,7 @@ export default function ProgramStack({ programs }: ProgramStackProps) {
               className="absolute top-0 left-1/2 flex aspect-[3/4] w-full items-center justify-center overflow-hidden rounded-sw bg-[repeating-linear-gradient(45deg,#1c0f24,#1c0f24_11px,#160b1d_11px,#160b1d_22px)] transition-[transform,opacity] duration-[550ms] ease-sw will-change-transform"
             >
               {p.image ? (
-                <Image src={p.image} alt="" fill unoptimized className="object-cover" />
+                <Image src={p.image} alt="" fill sizes="(max-width: 400px) 90vw, 340px" quality={95} className="object-cover" />
               ) : (
                 <span className="font-satoshi text-[11px] uppercase tracking-[0.12em] text-cognac">
                   Case study

@@ -44,7 +44,8 @@ export default function BlogGalleryCard({
         src={image}
         alt=""
         fill
-        unoptimized
+        sizes="(max-width: 900px) 90vw, 420px"
+        quality={95}
         priority={priority}
         className="object-cover transition-transform duration-[400ms] ease-out group-hover:scale-[1.02]"
       />

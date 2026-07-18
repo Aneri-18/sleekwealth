@@ -196,7 +196,8 @@ export default function BlogPostClient({ post, navPosts, stripPosts, previousPos
             alt={post.title}
             width={post.featuredImageWidth}
             height={post.featuredImageHeight}
-            unoptimized
+            sizes="(max-width: 600px) 90vw, 560px"
+            quality={95}
             priority
             className="mx-auto block rounded-sw"
             style={{ width: 'auto', height: 'auto', maxWidth: '100%', maxHeight: '65vh' }}

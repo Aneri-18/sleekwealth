@@ -153,7 +153,7 @@ export default function Nav({ bg, recentPosts }: NavProps) {
               <a key={post.title} href={post.href} className="flex items-center gap-4">
                 <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-sw bg-[repeating-linear-gradient(45deg,#1d1023,#1d1023_8px,#170c1d_8px,#170c1d_16px)]">
                   {post.image && (
-                    <Image src={post.image} alt="" fill unoptimized className="object-cover" />
+                    <Image src={post.image} alt="" fill sizes="56px" quality={95} className="object-cover" />
                   )}
                 </div>
                 <div className="flex flex-1 flex-col gap-1">

@@ -83,7 +83,14 @@ export default function ExpandingContainer({
               playsInline
             />
           ) : imageSrc ? (
-            <Image src={imageSrc} alt={alt} fill unoptimized className="object-cover" />
+            <Image
+              src={imageSrc}
+              alt={alt}
+              fill
+              sizes="(max-width: 1200px) 92vw, 1200px"
+              quality={95}
+              className="object-cover"
+            />
           ) : null}
           {!hasAsset && placeholderLabel && (
             <span className="relative px-8 text-center font-satoshi text-xs uppercase tracking-[0.14em] text-cognac">
