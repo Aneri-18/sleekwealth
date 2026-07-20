@@ -7,7 +7,7 @@ import Footer from '../../components/Footer'
 import BlogCard from '../../components/BlogCard'
 import { useInViewOnce } from '../../hooks/useInViewOnce'
 import { useAutoScrollStrip } from '../../hooks/useAutoScrollStrip'
-import { getFirstSentence, type BlogPost } from '../../data/posts'
+import type { BlogPost } from '../../data/posts'
 import type { AdjacentPosts, BlogStripCard, NavPost } from '../../data/posts-server'
 
 const AUBERGINE = '#120818'
@@ -26,7 +26,7 @@ export default function BlogPostClient({ post, navPosts, stripPosts, previousPos
   const rootRef = useRef<HTMLDivElement>(null)
   const articleRef = useRef<HTMLDivElement>(null)
   const { ref: subheadingRef, inView: subheadingInView } = useInViewOnce<HTMLParagraphElement>()
-  const subheading = post.subheadingOverride ?? getFirstSentence(post.bodyHtml)
+  const subheading = post.subtitle
   const [bg, setBg] = useState(AUBERGINE)
   const [headShown, setHeadShown] = useState(false)
   const [shareUrl, setShareUrl] = useState('')
@@ -193,7 +193,7 @@ export default function BlogPostClient({ post, navPosts, stripPosts, previousPos
         <div className="mx-auto w-full max-w-[560px]">
           <Image
             src={post.featuredImage}
-            alt={post.title}
+            alt={post.featuredImageAlt || post.title}
             width={post.featuredImageWidth}
             height={post.featuredImageHeight}
             sizes="(max-width: 600px) 90vw, 560px"
@@ -202,6 +202,11 @@ export default function BlogPostClient({ post, navPosts, stripPosts, previousPos
             className="mx-auto block rounded-sw"
             style={{ width: 'auto', height: 'auto', maxWidth: '100%', maxHeight: '65vh' }}
           />
+          {post.featuredImageCaption && (
+            <p className="mt-3 text-center font-satoshi text-[13px] text-parchment/60">
+              {post.featuredImageCaption}
+            </p>
+          )}
         </div>
       </section>
 

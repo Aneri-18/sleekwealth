@@ -23,6 +23,8 @@ export function categorySlug(category: BlogCategory): string {
 export interface BlogPost {
   slug: string
   title: string
+  // Manually written by Aneri — doubles as the on-page subheading shown beneath
+  // the title and the SEO/OG description. No auto-generated fallback.
   subtitle: string
   authorName: string
   authorTitle: string
@@ -30,6 +32,8 @@ export interface BlogPost {
   featuredImage: string
   featuredImageWidth: number
   featuredImageHeight: number
+  featuredImageAlt?: string
+  featuredImageCaption?: string
   publishedAt: string
   // Set automatically on every Pixie save (draft or publish) — absent on posts
   // migrated before this field existed, until they're next saved.
@@ -37,38 +41,4 @@ export interface BlogPost {
   readingTime: number
   bodyHtml: string
   status: 'draft' | 'published'
-  // Hand-written on-page subheading — every post currently sets this explicitly.
-  // If unset, falls back to the post's own first sentence (see getFirstSentence).
-  subheadingOverride?: string
-}
-
-const HTML_ENTITIES: Record<string, string> = {
-  amp: '&',
-  mdash: '—',
-  ndash: '–',
-  rsquo: '’',
-  lsquo: '‘',
-  rdquo: '”',
-  ldquo: '“',
-  trade: '™',
-  eacute: 'é',
-  egrave: 'è',
-  euro: '€',
-  nbsp: ' ',
-  hellip: '…',
-  quot: '"',
-  apos: "'",
-}
-
-// Derives the on-page subheading from the post's own opening line, rather than
-// duplicating a hand-written blurb — keeps it truthful to what the post actually opens with.
-export function getFirstSentence(bodyHtml: string): string {
-  const firstParagraph = bodyHtml.match(/<p[^>]*>([\s\S]*?)<\/p>/)
-  if (!firstParagraph) return ''
-  const plainText = firstParagraph[1]
-    .replace(/<[^>]+>/g, '')
-    .replace(/&([a-zA-Z]+);/g, (entity, name) => HTML_ENTITIES[name] ?? entity)
-    .trim()
-  const sentenceMatch = plainText.match(/^.*?[.!?](?=\s|$)/)
-  return sentenceMatch ? sentenceMatch[0].trim() : plainText
 }

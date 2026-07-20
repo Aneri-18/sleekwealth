@@ -33,8 +33,9 @@ export async function POST(request: NextRequest) {
     featuredImage,
     featuredImageWidth,
     featuredImageHeight,
+    featuredImageAlt,
+    featuredImageCaption,
     publishedAt,
-    subheadingOverride,
     status,
     bodyHtml,
   } = body
@@ -77,13 +78,12 @@ export async function POST(request: NextRequest) {
     featuredImage: typeof featuredImage === 'string' ? featuredImage : '',
     featuredImageWidth: Number(featuredImageWidth) || 0,
     featuredImageHeight: Number(featuredImageHeight) || 0,
+    featuredImageAlt: typeof featuredImageAlt === 'string' ? featuredImageAlt.trim() : '',
+    featuredImageCaption: typeof featuredImageCaption === 'string' ? featuredImageCaption.trim() : '',
     publishedAt: typeof publishedAt === 'string' && publishedAt ? publishedAt : new Date().toISOString().slice(0, 10),
     updatedAt: new Date().toISOString().slice(0, 10),
     readingTime,
     status,
-    ...(typeof subheadingOverride === 'string' && subheadingOverride.trim()
-      ? { subheadingOverride: subheadingOverride.trim() }
-      : {}),
   }
 
   const fileContents = matter.stringify(sanitizedBody, frontmatter)
