@@ -8,11 +8,12 @@ subtitle: Knowing what not to do yourself is the rarest skill in luxury.
 authorName: Aneri Shah
 authorTitle: 'Founder, Sleek Wealth'
 category: The Luxury Spectrum™
-featuredImage: ''
-featuredImageWidth: 0
-featuredImageHeight: 0
-featuredImageAlt: ''
-featuredImageCaption: ''
+featuredImage: >-
+  /blog/the-fifty-year-question-what-the-gucci-x-l-or-al-deal-really-says-about-brand-control/img-5108-1784870444174.jpeg
+featuredImageWidth: 800
+featuredImageHeight: 496
+featuredImageAlt: Image showing Kering x L’Oréal
+featuredImageCaption: Kering x L’Oréal
 publishedAt: '2026-07-24'
 updatedAt: '2026-07-24'
 readingTime: 4
