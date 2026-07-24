@@ -7,7 +7,7 @@ title: >-
 subtitle: Knowing what not to do yourself is the rarest skill in luxury.
 authorName: Aneri Shah
 authorTitle: 'Founder, Sleek Wealth'
-category: The Luxury Spectrum™
+category: Market Intelligence
 featuredImage: >-
   /blog/the-fifty-year-question-what-the-gucci-x-l-or-al-deal-really-says-about-brand-control/img-5108-1784870444174.jpeg
 featuredImageWidth: 800
